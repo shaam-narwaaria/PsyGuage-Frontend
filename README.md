@@ -13,13 +13,13 @@ Welcome to the **MERN Stack Game App**, a **full-stack web application** that pr
 This application is built using the **MERN (MongoDB, Express.js, React, Node.js) stack**, with a focus on **performance, security, and scalability**. It offers a seamless user experience with **JWT-based authentication**, secure API endpoints, and **responsive UI components**.
 
 ### 🔹 **Key Highlights:**
-✔️ Secure **User Authentication** (JWT, bcrypt.js)
-✔️ Multiple **Interactive Games** with Engaging UI
-✔️ **Real-time Score Tracking** via MongoDB
-✔️ **RESTful API** for High-Performance Data Fetching
-✔️ **Optimized UI/UX** for Desktop & Mobile
-✔️ **Deployed on Cloud Platforms** – **Render (Backend) & Vercel (Frontend)**
-✔️ **Scalable & Maintainable Codebase**
+- ✔️ Secure **User Authentication** (JWT, bcrypt.js)
+- ✔️ Multiple **Interactive Games** with Engaging UI
+- ✔️ **Real-time Score Tracking** via MongoDB
+- ✔️ **RESTful API** for High-Performance Data Fetching
+- ✔️ **Optimized UI/UX** for Desktop & Mobile
+- ✔️ **Deployed on Cloud Platforms** – **Render (Backend) & Vercel (Frontend)**
+- ✔️ **Scalable & Maintainable Codebase**
 
 ---
 
