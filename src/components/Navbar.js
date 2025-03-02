@@ -9,17 +9,12 @@ const Navbar = ({ setmovePages }) => {
   const loadUserData = () => {
     const storedName = JSON.parse(localStorage.getItem("game_username"));
     const storedEmail = JSON.parse(localStorage.getItem("game_useremail"));
-    
-    if (storedName && storedEmail) {
-      setLocalName(storedName);
-      setLocalEmail(storedEmail);
-    } else {
-      setLocalName("");
-      setLocalEmail("");
-    }
+
+    setLocalName(storedName || "");
+    setLocalEmail(storedEmail || "");
   };
 
-  // Run once when component mounts
+  // Run once when component mounts & when local storage changes
   useEffect(() => {
     loadUserData();
 
@@ -32,22 +27,26 @@ const Navbar = ({ setmovePages }) => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
+  // **Trigger re-render on login change**
+  useEffect(() => {
+    loadUserData();
+  }, [localStorage.getItem("game_username"), localStorage.getItem("game_useremail")]); 
+
   const logOut = () => {
     localStorage.removeItem("game_username");
     localStorage.removeItem("game_useremail");
-    loadUserData(); // Update navbar instantly
+    setLocalName(""); // Clear state
+    setLocalEmail(""); 
     setmovePages(0);
   };
 
   return (
     <nav className="nav-navbar">
       <div className="nav-navbar__left">
-        <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>
-          PsyGuage
-        </button>
+        <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>PsyGuage</button>
       </div>
 
-      <div className="">
+      <div>
         {localName ? (
           <>
             <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
