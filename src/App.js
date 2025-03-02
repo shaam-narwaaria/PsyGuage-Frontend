@@ -183,7 +183,7 @@ function App() {
         </div>
       )}
 
-//       {/* ✅ Render Games */}
+      {/* ✅ Render Games */}
       {movePages === 2 && <SymbolGame userName={localName} userEmail={localEmail} setmovePages={setmovePages} />}
       {movePages === 3 && <QuickClickGame userName={localName} userEmail={localEmail} setmovePages={setmovePages} />}
       {movePages === 4 && <UserProfile localName={localName} localEmail={localEmail} setmovePages={setmovePages} />}
