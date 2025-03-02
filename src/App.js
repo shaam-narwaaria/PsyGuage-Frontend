@@ -371,7 +371,7 @@ function App() {
         </div>
       )}
 
-      {/* ✅ Render Games */}
+//       {/* ✅ Render Games */}
       {movePages === 2 && <SymbolGame userName={localName} userEmail={localEmail} setmovePages={setmovePages} />}
       {movePages === 3 && <QuickClickGame userName={localName} userEmail={localEmail} setmovePages={setmovePages} />}
       {movePages === 4 && <UserProfile localName={localName} localEmail={localEmail} setmovePages={setmovePages} />}
@@ -384,5 +384,16 @@ function App() {
     </div>
   );
 }
+
+// ✅ Reusable Game Card Component
+const GameCard = ({ image, title, onClick }) => (
+  <div className="app-game-card" onClick={onClick}>
+    <div className="app-game-image">
+      <img src={image} alt={title} />
+    </div>
+    <div className="app-game-name">{title}</div>
+    <div className="app-custom_button">Play</div>
+  </div>
+);
 
 export default App;
