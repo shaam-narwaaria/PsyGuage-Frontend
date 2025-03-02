@@ -2,41 +2,28 @@ import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 
 const Navbar = ({ setmovePages }) => {
-  const [localName, setLocalName] = useState("");
-  const [localEmail, setLocalEmail] = useState("");
+  const [user, setUser] = useState({
+    name: localStorage.getItem("game_username") ? JSON.parse(localStorage.getItem("game_username")) : "",
+    email: localStorage.getItem("game_useremail") ? JSON.parse(localStorage.getItem("game_useremail")) : ""
+  });
 
   // Function to load user data
   const loadUserData = () => {
-    const storedName = JSON.parse(localStorage.getItem("game_username"));
-    const storedEmail = JSON.parse(localStorage.getItem("game_useremail"));
-
-    setLocalName(storedName || "");
-    setLocalEmail(storedEmail || "");
+    const storedName = JSON.parse(localStorage.getItem("game_username")) || "";
+    const storedEmail = JSON.parse(localStorage.getItem("game_useremail")) || "";
+    setUser({ name: storedName, email: storedEmail });
   };
 
-  // Run once when component mounts & when local storage changes
+  // Listen for login changes
   useEffect(() => {
-    loadUserData();
-
-    // Listen for storage changes (e.g., login from another tab)
-    const handleStorageChange = () => {
-      loadUserData();
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener("storage", loadUserData);
+    return () => window.removeEventListener("storage", loadUserData);
   }, []);
-
-  // **Trigger re-render on login change**
-  useEffect(() => {
-    loadUserData();
-  }, [localStorage.getItem("game_username"), localStorage.getItem("game_useremail")]); 
 
   const logOut = () => {
     localStorage.removeItem("game_username");
     localStorage.removeItem("game_useremail");
-    setLocalName(""); // Clear state
-    setLocalEmail(""); 
+    setUser({ name: "", email: "" }); // Clear state
     setmovePages(0);
   };
 
@@ -47,7 +34,7 @@ const Navbar = ({ setmovePages }) => {
       </div>
 
       <div>
-        {localName ? (
+        {user.name ? (
           <>
             <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
             <button className="nav-navbar__button" onClick={() => setmovePages(4)}>Profile</button>
