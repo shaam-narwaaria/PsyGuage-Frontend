@@ -5,24 +5,38 @@ const Navbar = ({ setmovePages }) => {
   const [localName, setLocalName] = useState("");
   const [localEmail, setLocalEmail] = useState("");
 
-  useEffect(() => {
-    // Get user details from localStorage
+  // Function to load user data
+  const loadUserData = () => {
     const storedName = JSON.parse(localStorage.getItem("game_username"));
     const storedEmail = JSON.parse(localStorage.getItem("game_useremail"));
-
+    
     if (storedName && storedEmail) {
       setLocalName(storedName);
       setLocalEmail(storedEmail);
+    } else {
+      setLocalName("");
+      setLocalEmail("");
     }
+  };
+
+  // Run once when component mounts
+  useEffect(() => {
+    loadUserData();
+
+    // Listen for storage changes (e.g., login from another tab)
+    const handleStorageChange = () => {
+      loadUserData();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const logOut = () => {
     localStorage.removeItem("game_username");
     localStorage.removeItem("game_useremail");
-    setLocalName("");
-    setLocalEmail("");
+    loadUserData(); // Update navbar instantly
     setmovePages(0);
-    window.location.reload();
   };
 
   return (
