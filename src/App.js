@@ -233,11 +233,12 @@ function App() {
       try {
         await axios.post(`${BASE_URL}/api/register`, { name: userName, email: userEmail });
 
+        // ✅ Save user data in localStorage
         localStorage.setItem("game_username", JSON.stringify(userName));
         localStorage.setItem("game_useremail", JSON.stringify(userEmail));
 
-        setError("");
-        setmovePages(1);
+        setError(""); // Clear errors
+        setmovePages(1); // Move to Game Selection Page
       } catch (error) {
         if (error.response && error.response.status === 409) {
           setError("User already exists. Please log in.");
@@ -249,6 +250,7 @@ function App() {
       setError("*Fill fields properly");
     }
   };
+
 
   // ✅ Submit Score Function
   const submitScore = async () => {
@@ -282,10 +284,13 @@ function App() {
       <Navbar localName={localName} userEmail={localEmail} setmovePages={setmovePages} movePages={movePages} />
 
       {/* ✅ Login Page */}
+
       {movePages === 0 && (
         <div className="app-login-container">
           <div className="app-login-box">
             <h2 className="app-login-header">Welcome!</h2>
+
+            {/* ✅ Name Input */}
             <input
               type="text"
               className="app-input-field"
@@ -293,6 +298,8 @@ function App() {
               value={userName}
               placeholder="Enter your name"
             />
+
+            {/* ✅ Email Input */}
             <input
               type="email"
               className="app-input-field"
@@ -300,21 +307,36 @@ function App() {
               value={userEmail}
               placeholder="Enter your email"
             />
-            <button className="app-login-button" onClick={registerUser} disabled={!userName || !userEmail}>
-              Save
+
+            {/* ✅ Register Button */}
+            <button
+              className="app-login-button"
+              onClick={registerUser}
+              disabled={!userName || !userEmail}
+            >
+              Register
             </button>
 
-            {/* ✅ Show Sign In Button if User Exists */}
+            {/* ✅ Show "Sign In" if User Exists */}
             {error === "User already exists. Please log in." && (
-              <button className="app-login-button" onClick={() => setmovePages(4)}>
+              <button
+                className="app-login-button"
+                onClick={() => {
+                  localStorage.setItem("game_username", JSON.stringify(userName));
+                  localStorage.setItem("game_useremail", JSON.stringify(userEmail));
+                  setmovePages(1); // Move to Game Selection Page
+                }}
+              >
                 Sign In
               </button>
             )}
 
+            {/* ✅ Error Messages */}
             {error && <p className="app-error-message">{error}</p>}
           </div>
         </div>
       )}
+
 
       {/* ✅ Home Page */}
       {movePages === 6 && <Home setmovePages={setmovePages} />}
