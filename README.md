@@ -74,7 +74,6 @@ This application is built using the **MERN (MongoDB, Express.js, React, Node.js)
 * **Game 3 (Example: Typing Speed):**
     * A game where the user must type the words that appear on the screen as fast as possible.
     * Scores are based on words per minute and accuracy.
-* *(Add descriptions for all your games here)*
 
 ---
 
@@ -133,8 +132,6 @@ This application is built using the **MERN (MongoDB, Express.js, React, Node.js)
 * **`POST /api/users/login`:** Login and get a JWT token.
 * **`GET /api/scores`:** Get all user scores (requires authentication).
 * **`POST /api/scores`:** Add a new score (requires authentication).
-* *(Add more API endpoints here)*
-
 ---
 
 ## 🤝 Contribution Guidelines
