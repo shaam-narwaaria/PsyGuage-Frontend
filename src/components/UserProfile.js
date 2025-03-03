@@ -138,8 +138,33 @@ const UserProfile = (props) => {
     return (
         <div className="user_profile">
             <div className="container">
+
                 {loading ? (
-                    <div className="loading_spinner">Loading...</div>
+                    <div className="skeleton_container">
+                        {/* Profile Skeleton */}
+                        <div className="skeleton-profile-section">
+                            <div className="skeleton-profile"></div>
+                            <div className="skeleton-text skeleton-text-lg"></div>
+                            <div className="skeleton-text skeleton-text-sm"></div>
+                        </div>
+
+                        {/* Psychometric Score Skeleton */}
+                        <div className="skeleton-score-container">
+                            {Array(6).fill(0).map((_, index) => (
+                                <div key={index} className="skeleton-score-bar">
+                                    <div className="skeleton-text skeleton-text-md"></div>
+                                    <div className="skeleton-bar"></div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Game Card Skeletons */}
+                        <div className="skeleton-game-container">
+                            {Array(6).fill(0).map((_, index) => (
+                                <div key={index} className="skeleton-card"></div>
+                            ))}
+                        </div>
+                    </div>
                 ) : (
                     <>
                         {data.length === 0 ? (
