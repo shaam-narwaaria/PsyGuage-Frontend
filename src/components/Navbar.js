@@ -50,20 +50,104 @@
 //   );
 // };
 
+
+// import React, { useState, useRef, useEffect } from "react";
+// import "./Navbar.css";
+
+// const Navbar = ({ setmovePages }) => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const menuRef = useRef(null);
+
+//   // Close menu when clicking outside
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (menuRef.current && !menuRef.current.contains(event.target)) {
+//         setMenuOpen(false);
+//       }
+//     };
+
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, []);
+
+//   return (
+//     <nav className="nav-navbar">
+//       <div className="nav-navbar__left">
+//         <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>PsyGuage</button>
+//       </div>
+
+//       {/* PC: Show navbar, Mobile: Show menu icon */}
+//       <div className="nav-navbar__menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+//         ☰
+//       </div>
+
+//       {/* Desktop Navbar (always visible) */}
+//       <div className="nav-navbar__links">
+//         <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(4)}>Profile</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(1)}>Games</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(11)}>Instructions</button>
+//       </div>
+
+//       {/* Mobile Dropdown Menu */}
+//       <div ref={menuRef} className={`nav-navbar__dropdown ${menuOpen ? "open" : ""}`}>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(4)}>Profile</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(1)}>Games</button>
+//         <button className="nav-navbar__button" onClick={() => setmovePages(11)}>Instructions</button>
+//       </div>
+//     </nav>
+//   );
+// };
+
 // export default Navbar;
 
-import React from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
 
 const Navbar = ({ setmovePages }) => {
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav className="nav-navbar">
+      {/* Brand Logo */}
       <div className="nav-navbar__left">
         <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>PsyGuage</button>
       </div>
 
-      <div>
+      {/* Hamburger Menu Icon (Mobile) */}
+      <div className="nav-navbar__menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
+
+      {/* Desktop Navbar (always visible) */}
+      <div className="nav-navbar__links">
+        <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
+        <button className="nav-navbar__button" onClick={() => setmovePages(4)}>Profile</button>
+        <button className="nav-navbar__button" onClick={() => setmovePages(1)}>Games</button>
+        <button className="nav-navbar__button" onClick={() => setmovePages(11)}>Instructions</button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      <div ref={menuRef} className={`nav-navbar__dropdown ${menuOpen ? "open" : ""}`}>
         <button className="nav-navbar__button" onClick={() => setmovePages(6)}>Home</button>
         <button className="nav-navbar__button" onClick={() => setmovePages(4)}>Profile</button>
         <button className="nav-navbar__button" onClick={() => setmovePages(1)}>Games</button>
@@ -74,3 +158,4 @@ const Navbar = ({ setmovePages }) => {
 };
 
 export default Navbar;
+

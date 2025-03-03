@@ -1,114 +1,102 @@
+/* Navbar container (Compact) */
 .nav-navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #0E91A1;
-    padding: 12px 20px;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    flex-wrap: wrap;
-}
-
-/* Left Side */
-.nav-navbar__left {
-    display: flex;
     align-items: center;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Deep blue gradient */
+    padding: 0; /* Reduced padding for compact height */
+    color: white;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
 
-/* Brand Name */
+/* Brand Button */
 .nav-navbar__brand {
-    font-size: 1.6rem;
-    color: #FFFFFF;
     background: none;
-    cursor: pointer;
-    padding: 8px 12px;
-    transition: color 0.3s ease;
-}
-
-/* Buttons */
-.nav-navbar__buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.nav-navbar__button {
-    color: #FFFFFF;
-    background-color: #0B7888;
     border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 500;
+    color: #ffcc00; /* Golden color for contrast */
+    font-size: 30px; /* Reduced size */
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-shadow: 1px 1px 6px rgba(255, 204, 0, 0.6); /* Soft glow */
+    transition: color 0.3s ease-in-out;
 }
 
-.nav-navbar__logout {
-    background-color: #F28D8D;
-    color: #FFFFFF;
+.nav-navbar__brand:hover {
+    color: #ffffff;
+    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.9);
 }
 
-.nav-navbar__button:active,
-.nav-navbar__logout:active {
-    background-color: #0B6A77;
+/* Menu Icon (Hamburger for Mobile) */
+.nav-navbar__menu-icon {
+    display: none;
+    font-size: 26px; /* Slightly smaller */
+    cursor: pointer;
+    color: #ffcc00;
+    transition: color 0.3s ease-in-out;
 }
 
-.nav-navbar__logout:active {
-    background-color: #E57373;
+.nav-navbar__menu-icon:hover {
+    color: white;
 }
 
-/* Tablet & Mobile Responsive */
-@media (max-width: 768px) {
-    .nav-navbar {
-        flex-direction: column;
-        align-items: center;
-        padding: 14px;
-    }
-
-    .nav-navbar__left {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .nav-navbar__brand {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-    }
-
-    .nav-navbar__buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 8px;
-    }
-
-    .nav-navbar__button,
-    .nav-navbar__logout {
-        width: 100%;
-        text-align: center;
-        padding: 12px;
-    }
+/* Navbar Links (Always Visible on PC) */
+.nav-navbar__links {
+    display: flex;
+    gap: 8px; /* Reduced space between buttons */
 }
 
-/* Small Mobile Screens (Hamburger Menu) */
-@media (max-width: 480px) {
-    .nav-navbar {
-        padding: 10px;
+/* Buttons inside Navbar */
+.nav-navbar__button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 2px 10px; /* Reduced button padding */
+    font-size: 20px; /* Smaller font size */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 4px; /* Slightly rounded edges */
+}
+
+.nav-navbar__button:hover {
+    background: rgba(255, 204, 0, 0.3);
+    box-shadow: 0 0 6px rgba(255, 204, 0, 0.5);
+    transform: scale(1.05);
+}
+
+/* Navbar Dropdown Menu (Mobile) */
+.nav-navbar__dropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px; /* Adjusted for better fit */
+    right: 10px;
+    background: rgba(30, 60, 114, 0.95);
+    padding: 10px; /* Smaller padding */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    width: 160px; /* Reduced width */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Show menu when open */
+.nav-navbar__dropdown.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive: Show Hamburger Menu on Mobile, Hide Regular Navbar */
+@media screen and (max-width: 768px) {
+    .nav-navbar__menu-icon {
+        display: block;
     }
 
-    .nav-navbar__brand {
-        font-size: 1.2rem;
-    }
-
-    .nav-navbar__buttons {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-
-    .nav-navbar__button,
-    .nav-navbar__logout {
-        font-size: 1rem;
-        padding: 10px;
+    .nav-navbar__links {
+        display: none;
     }
 }
