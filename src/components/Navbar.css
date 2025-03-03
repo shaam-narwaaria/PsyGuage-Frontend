@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(to right, #1e3c72, #2a5298); /* Deep blue gradient */
-    padding: 0; /* Reduced padding for compact height */
+    padding: 0px 15px 00px 10px; /* Reduced padding for compact height */
     color: white;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -34,6 +34,7 @@
     font-size: 26px; /* Slightly smaller */
     cursor: pointer;
     color: #ffcc00;
+    padding: 0px 40px 0px 0px;
     transition: color 0.3s ease-in-out;
 }
 
