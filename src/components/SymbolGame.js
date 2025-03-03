@@ -73,21 +73,38 @@ const SymbolGame = (props) => {
     }
   };
 
+  // const saveScores = async () => {
+  //   const responseTime = (Date.now() - startTime) / 1000; // Calculate the response time in seconds
+  //   try {
+  //     await axios.post('http://localhost:5000/api/scores', {
+  //       gameName: "SymbolCounter",
+  //       name: userName,
+  //       email: userEmail,
+  //       score: totalScore,
+  //       responseSymbolTime: responseTime,
+  //     });
+  //     console.log('Score saved successfully');
+  //   } catch (error) {
+  //     console.error('Error saving score:', error);
+  //   }
+  // };
+
   const saveScores = async () => {
-    const responseTime = (Date.now() - startTime) / 1000; // Calculate the response time in seconds
+    const responseTime = (Date.now() - startTime) / 1000; // Calculate response time in seconds
     try {
-      await axios.post('http://localhost:5000/api/scores', {
-        gameName: "SymbolCounter",
-        name: userName,
-        email: userEmail,
-        score: totalScore,
-        responseSymbolTime: responseTime,
-      });
-      console.log('Score saved successfully');
+        await axios.post("https://psyguage-backend.onrender.com/api/scores", {
+            gameName: "SymbolCounter",
+            name: userName,
+            email: userEmail,
+            score: totalScore,
+            responseSymbolTime: responseTime,
+        });
+        console.log("Score saved successfully");
     } catch (error) {
-      console.error('Error saving score:', error);
+        console.error("Error saving score:", error);
     }
-  };
+};
+
 
   return (
     <div className="container-symbol">

@@ -111,18 +111,33 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
         setMessage(`Game Over! Final score: ${score}`);
     };
 
+    // const saveScore = async (finalScore) => {
+    //     try {
+    //         await axios.post("http://localhost:5000/api/scores", {
+    //             gameName: "Track of Thought",
+    //             name: userName,
+    //             email: userEmail,
+    //             score: finalScore
+    //         });
+    //     } catch (error) {
+    //         console.error("Failed to save score:", error);
+    //     }
+    // };
+
     const saveScore = async (finalScore) => {
         try {
-            await axios.post("http://localhost:5000/api/scores", {
+            await axios.post("https://psyguage-backend.onrender.com/api/scores", {
                 gameName: "Track of Thought",
                 name: userName,
                 email: userEmail,
                 score: finalScore
             });
+            console.log("Score submitted successfully!");
         } catch (error) {
             console.error("Failed to save score:", error);
         }
     };
+    
 
     useEffect(() => {
         let ballGenerator, positionUpdater;

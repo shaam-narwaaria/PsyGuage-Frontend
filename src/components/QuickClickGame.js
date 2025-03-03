@@ -57,16 +57,32 @@ const QuickClickGame = ({ userName, userEmail, setmovePages }) => {
         }
     };
 
+    // const saveScore = async (avgTime) => {
+    //     // Save the score and rounds to the backend
+    //     await axios.post('http://localhost:5000/api/scores', {
+    //         gameName: 'QuickClick',
+    //         name: userName,
+    //         email: userEmail,
+    //         score: avgTime*10,
+    //         rounds: rounds,
+    //     });
+    // };
+
     const saveScore = async (avgTime) => {
-        // Save the score and rounds to the backend
-        await axios.post('http://localhost:5000/api/scores', {
-            gameName: 'QuickClick',
-            name: userName,
-            email: userEmail,
-            score: avgTime*10,
-            rounds: rounds,
-        });
+        try {
+            await axios.post('https://psyguage-backend.onrender.com/api/scores', {
+                gameName: 'QuickClick',
+                name: userName,
+                email: userEmail,
+                score: avgTime * 10,
+                rounds: rounds,
+            });
+            console.log("Score submitted successfully!");
+        } catch (error) {
+            console.error("Error submitting score:", error);
+        }
     };
+    
 
     const restartGame = () => {
         // Reset all game states for a new game

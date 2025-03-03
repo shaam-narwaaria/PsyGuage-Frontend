@@ -50,19 +50,34 @@ const MissingNumberGame = ({ userName, userEmail, setmovePages }) => {
     };
 
     // Save the score to the server
+    // const saveScore = async (finalScore) => {
+    //     try {
+    //         const response = await axios.post('http://localhost:5000/api/scores', {
+    //             gameName: 'MissingNumber',
+    //             name: userName,
+    //             email: userEmail,
+    //             score: finalScore,
+    //         });
+    //         console.log('Score saved successfully:', response.data);
+    //     } catch (error) {
+    //         console.error('Error saving score:', error);
+    //     }
+    // };
+
     const saveScore = async (finalScore) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/scores', {
-                gameName: 'MissingNumber',
+            const response = await axios.post("https://psyguage-backend.onrender.com/api/scores", {
+                gameName: "MissingNumber",
                 name: userName,
                 email: userEmail,
                 score: finalScore,
             });
-            console.log('Score saved successfully:', response.data);
+            console.log("Score saved successfully:", response.data);
         } catch (error) {
-            console.error('Error saving score:', error);
+            console.error("Error saving score:", error);
         }
     };
+    
 
     // Reset the game
     const resetGame = () => {
