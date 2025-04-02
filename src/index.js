@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import React, { Suspense, lazy } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is included
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// Lazy load the App component for performance boost
+const App = lazy(() => import("./App"));
+
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <Router>
+        {/* Suspense fallback UI for smoother experience */}
+        <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
+          <App />
+        </Suspense>
+      </Router>
+    </React.StrictMode>
+  );
+} else {
+  console.error("❌ Error: Root element not found. Check your HTML structure.");
+}
