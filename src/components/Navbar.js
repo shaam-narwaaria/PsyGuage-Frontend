@@ -52,76 +52,93 @@
 
 // export default Navbar;
 
-
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap/dist/js/bootstrap.bundle.min"; 
+import { Offcanvas } from "bootstrap";
+import { House, Person, Joystick, Book } from "react-bootstrap-icons"; 
 
 const Navbar = ({ setmovePages }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const offcanvasElement = document.getElementById("offcanvasNavbar");
+    if (offcanvasElement) {
+      offcanvasElement.addEventListener("hidden.bs.offcanvas", () => {});
+    }
+  }, []);
+
+  const closeOffcanvas = () => {
+    const offcanvas = document.getElementById("offcanvasNavbar");
+    if (offcanvas) {
+      const bsOffcanvas = new Offcanvas(offcanvas);
+      bsOffcanvas.hide();
+    }
+  };
+
+  const handleNavigation = (page) => {
+    closeOffcanvas();
+    setTimeout(() => setmovePages(page), 300);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        {/* Brand */}
-        <NavLink className="navbar-brand fw-bold" to="/" onClick={() => setmovePages(6)}>
-          PsyGauge
-        </NavLink>
+    <>
+      {/* ✅ Static Bottom Navigation Bar (Always Visible) */}
+      <nav className="navbar navbar-light bg-white fixed-bottom shadow-lg">
+        <div className="container d-flex justify-content-around py-2">
+          <button className="btn text-center" onClick={() => handleNavigation(6)}>
+            <House size={24} className="mb-1" />
+            <div className="small">Home</div>
+          </button>
+          <button className="btn text-center" onClick={() => handleNavigation(4)}>
+            <Person size={24} className="mb-1" />
+            <div className="small">Profile</div>
+          </button>
+          <button className="btn text-center" onClick={() => handleNavigation(1)}>
+            <Joystick size={24} className="mb-1" />
+            <div className="small">Games</div>
+          </button>
+          <button className="btn text-center" onClick={() => handleNavigation(11)}>
+            <Book size={24} className="mb-1" />
+            <div className="small">Instructions</div>
+          </button>
+        </div>
+      </nav>
 
-        {/* Toggle Button for Mobile */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar"
-          aria-expanded={menuOpen}
-          aria-label="Toggle navigation"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+      {/* ✅ Offcanvas Sidebar (Half-Screen) */}
+      <div
+        className="offcanvas offcanvas-end"
+        tabIndex="-1"
+        id="offcanvasNavbar"
+        style={{ width: "50%" }} 
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title">Menu</h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            onClick={closeOffcanvas}
+          ></button>
+        </div>
 
-        {/* Sidebar for Mobile */}
-        <div
-          className={`offcanvas offcanvas-end ${menuOpen ? "show" : ""}`}
-          tabIndex="-1"
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              Menu
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-              onClick={() => setMenuOpen(false)}
-            ></button>
-          </div>
-
-          <div className="offcanvas-body">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <button className="nav-link btn" onClick={() => setmovePages(6)}>Home</button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link btn" onClick={() => setmovePages(4)}>Profile</button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link btn" onClick={() => setmovePages(1)}>Games</button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link btn" onClick={() => setmovePages(11)}>Instructions</button>
-              </li>
-            </ul>
-          </div>
+        <div className="offcanvas-body">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={() => handleNavigation(6)}>Home</button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={() => handleNavigation(4)}>Profile</button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={() => handleNavigation(1)}>Games</button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn" onClick={() => handleNavigation(11)}>Instructions</button>
+            </li>
+          </ul>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
