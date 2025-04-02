@@ -1,0 +1,5 @@
+/* Ensures content is visible above the bottom navbar */
+.content-wrapper {
+    padding-bottom: 100px; /* Adjust this value based on your navbar height */
+  }
+  

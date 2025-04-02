@@ -15,9 +15,12 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       <Router>
-        {/* Suspense fallback UI for smoother experience */}
+        {/* Suspense fallback UI for a smoother experience */}
         <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
-          <App />
+          {/* Wrapper to prevent bottom navbar from hiding content */}
+          <div className="content-wrapper">
+            <App />
+          </div>
         </Suspense>
       </Router>
     </React.StrictMode>
