@@ -130,7 +130,7 @@ const Navbar = ({ setmovePages }) => {
     <nav className="nav-navbar">
       {/* Brand Logo */}
       <div className="nav-navbar__left">
-        <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>PsyGuage</button>
+        <button className="nav-navbar__brand" onClick={() => setmovePages(6)}>PsyGauge</button>
       </div>
 
       {/* Hamburger Menu Icon (Mobile) */}
