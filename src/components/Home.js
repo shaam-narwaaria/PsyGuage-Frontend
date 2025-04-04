@@ -28,8 +28,7 @@ function Home({ setmovePages }) {
                             </h1>
 
                             <p className="lead text-start">
-                                Revolutionizing candidate assessment through <span className="fw-bold">interactive psychometric games.</span>
-                                Test skills like <span className="text-warning">multitasking</span>, <span className="text-warning">problem-solving</span>, and <span className="text-warning">reaction time</span>.
+                                Revolutionizing candidate assessment through <span className="fw-bold">interactive psychometric games.</span> Test skills like <span className="text-warning">multitasking</span>, <span className="text-warning">problem-solving</span>, and <span className="text-warning">reaction time</span>.
                             </p>
 
                             {/* Bullet Points with Blue Tick Icons */}
