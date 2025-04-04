@@ -13,7 +13,8 @@ function Home({ setmovePages }) {
     };
 
     return (
-        <div className="container-fluid p-0">
+        // <div className="container-fluid p-0">
+        <div className="container-fluid p-0" style={{ paddingTop: "65px", paddingBottom: "75px" }}>
 
             {/* Hero Section */}
             <header className="text-white d-flex align-items-center py-5"
@@ -40,9 +41,18 @@ function Home({ setmovePages }) {
 
                             {/* Centered Button */}
                             <div className="d-flex justify-content-center mt-4">
-                                <button className="btn btn-lg btn-light shadow-lg fw-bold px-5 py-3" onClick={() => setmovePages(1)}>
+                                <button
+                                    className="btn btn-lg fw-bold px-5 py-3 shadow-lg"
+                                    style={{
+                                        background: "linear-gradient(135deg, #ff8c00, #ff2e63)",
+                                        color: "white",
+                                        border: "none"
+                                    }}
+                                    onClick={() => setmovePages(1)}
+                                >
                                     Start Your Journey 🚀
                                 </button>
+
                             </div>
 
                             <p className="mt-3 small text-center">No registration required. Try it now!</p>
@@ -57,10 +67,6 @@ function Home({ setmovePages }) {
                     </div>
                 </div>
             </header>
-
-
-
-
 
 
             {/* Why Choose PsyGauge? */}
@@ -151,12 +157,13 @@ function Home({ setmovePages }) {
                                     onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
                                 >
                                     {/* Image Wrapper */}
-                                    <div className="position-relative" style={{ height: "100px", overflow: "hidden" }}>
+                                    <div className="position-relative" style={{ height: "100px", overflow: "hidden", borderRadius: "10px" }}>
                                         <img src={game.img} alt={game.title}
                                             className="w-100 h-100 object-fit-cover"
-                                            style={{ maxHeight: "160px" }} // Reduced height
+                                            style={{ height: "100%", objectFit: "cover", borderRadius: "10px" }}
                                         />
                                     </div>
+
 
                                     {/* Content */}
                                     <div className="card-body text-start p-4">
@@ -190,7 +197,7 @@ function Home({ setmovePages }) {
                                     />
                                     {/* Text Content */}
                                     <div>
-                                        <p className="text-secondary fst-italic mb-1">"{review.feedback}"</p>
+                                        <p className="text-secondary mb-1">{review.feedback}</p>
                                         <h6 className="fw-bold text-primary mt-2">{review.name}</h6>
                                     </div>
                                 </div>
@@ -218,12 +225,14 @@ function Home({ setmovePages }) {
                             <div className="accordion-item border-0 rounded-3 mb-3 shadow-sm" key={index} style={{ backgroundColor: "#fff" }}>
                                 <h2 className="accordion-header">
                                     <button
-                                        className={`accordion-button ${openIndex === index ? "" : "collapsed"} bg-white fw-bold`}
+                                        className={`accordion-button ${openIndex === index ? "" : "collapsed"} fw-bold`}
                                         type="button"
                                         onClick={() => toggleFAQ(index)}
+                                        style={{ color: "#333", background: "white" }}
                                     >
                                         {faq.question}
                                     </button>
+
                                 </h2>
                                 <div className={`accordion-collapse collapse ${openIndex === index ? "show" : ""}`}>
                                     <div className="accordion-body text-muted">{faq.answer}</div>
@@ -250,7 +259,7 @@ function Home({ setmovePages }) {
 
             {/* Footer */}
             <footer className="text-white text-center py-4"
-                style={{ background: "linear-gradient(135deg, #232526, #414345)", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+                style={{ background: "linear-gradient(135deg,rgb(0, 170, 255),rgb(0, 128, 255))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
                 <div className="container">
                     <p className="mb-3" style={{ fontSize: "14px", opacity: "0.8" }}>
                         &copy; {new Date().getFullYear()} PsyGauge. All rights reserved.

@@ -4,8 +4,8 @@ import { HouseFill, PersonFill, Joystick, BookFill } from "react-bootstrap-icons
 
 const Navbar = ({ setmovePages }) => {
   useEffect(() => {
-    document.body.style.paddingTop = "65px";   // Prevents content from being hidden by top navbar
-    document.body.style.paddingBottom = "70px"; // Prevents content from being hidden by bottom navbar
+    document.body.style.paddingTop = "60px";   // Prevents content from being hidden by top navbar
+    document.body.style.paddingBottom = "65px"; // Prevents content from being hidden by bottom navbar
   }, []);
 
   const handleNavigation = (page) => {
@@ -15,7 +15,7 @@ const Navbar = ({ setmovePages }) => {
   return (
     <>
       {/* 🔹 Top Navbar */}
-      <nav className="navbar navbar-dark fixed-top shadow-sm py-3"
+      <nav className="navbar navbar-dark fixed-top shadow-sm py-2 rounded-bottom"
         style={{
           background: "linear-gradient(135deg, #6a11cb, #2575fc)",
           height: "65px",
@@ -29,7 +29,7 @@ const Navbar = ({ setmovePages }) => {
       </nav>
 
       {/* 🔹 Bottom Navigation Bar */}
-      <nav className="navbar navbar-light fixed-bottom shadow-lg border-top py-2"
+      <nav className="navbar navbar-light fixed-bottom shadow-lg border-top py-2 rounded-top"
         style={{ backgroundColor: "#2575fc", height: "70px" }}>
         <div className="container d-flex justify-content-around">
           {[

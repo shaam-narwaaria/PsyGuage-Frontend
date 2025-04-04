@@ -3,176 +3,161 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './InstructionsPage.css';
 
-
 const gamesData = [
     {
         name: "Track of Thought",
-        description: "Guide each circle to its matching color destination by adjusting the track switches.",
+        description: "Strategically guide moving circles to their designated color-matching destinations by manipulating track switches.",
         howToPlay: [
-            "Click/tap the circled part of the track to change its direction, guiding the circle to the correct destination.",
-            "Plan switches in advance for smoother guidance and avoid rapid consecutive clicks."
+            "Tap or click on the highlighted track sections to change their direction.",
+            "Plan ahead to ensure the smoothest route for each moving circle.",
+            "Avoid rapid consecutive clicks, as precise adjustments lead to better control."
         ],
         scoring: [
-            "Base Points: Each correctly directed train is worth fixed points.",
-            "Level Multiplier: Points increase as levels progress."
+            "Base Points: Successfully directing a circle to the correct destination awards points.",
+            "Level Multiplier: Higher levels grant additional score multipliers."
         ],
         tips: [
-            "Prioritize clear paths for upcoming trains by setting switches ahead of time.",
-            "Fewer mistakes mean faster trains and higher scores."
+            "Pre-plan switch placements for upcoming paths.",
+            "Fewer mistakes allow for faster movement and higher scores."
         ]
     },
     {
         name: "Pinball Recall",
-        description: "Predict the ball's path as it bounces at 90-degree angles off bumpers.",
+        description: "Analyze and predict the trajectory of a bouncing ball as it interacts with obstacles.",
         howToPlay: [
-            "Observe bumper orientation and predict where the ball will go after each bounce.",
-            "Each level increases complexity with more bumpers."
+            "Observe the arrangement of bumpers and predict the ball's path.",
+            "Click on the correct endpoint where the ball will land after its final bounce.",
+            "Levels become progressively harder with more obstacles."
         ],
         scoring: [
-            "Correct Predictions: Points are awarded for each accurate prediction.",
-            "Higher Levels, Higher Scores: Predicting longer paths earns more points."
+            "Accuracy Points: Correct predictions reward points.",
+            "Bonus Points: Multiple correct predictions in a row grant score multipliers."
         ],
         tips: [
-            "Mentally trace each bounce carefully.",
-            "Start with simpler levels to build path prediction skills."
+            "Visualize the bounces before selecting an endpoint.",
+            "Start by tracking the ball's path from one obstacle to the next."
         ]
     },
     {
         name: "Symbol Speedster",
-        description: "Count the number of target symbols in a grid within a time limit.",
+        description: "Quickly count and identify target symbols within a dynamic grid under time constraints.",
         howToPlay: [
-            "Identify the target symbol and count its occurrences in the grid.",
-            "Submit your count quickly to score points."
+            "Examine the grid and identify the target symbol.",
+            "Count the occurrences of the symbol as quickly as possible.",
+            "Submit your count before time runs out."
         ],
         scoring: [
-            "Speed: Faster responses yield higher scores.",
-            "Correctness: Incorrect answers result in zero points."
+            "Speed Bonus: Faster responses result in higher scores.",
+            "Correctness: Incorrect submissions yield zero points."
         ],
         tips: [
-            "Focus on clusters of symbols to count faster.",
-            "Double-check before submitting to avoid mistakes."
+            "Scan the grid in sections to count efficiently.",
+            "Double-check your count before submitting."
         ]
     },
     {
         name: "Memory Match",
-        description: "Flip cards to find matching pairs while remembering their locations.",
+        description: "Flip and memorize card positions to uncover matching pairs efficiently.",
         howToPlay: [
-            "Click on a card to flip it over and reveal the symbol.",
-            "Try to match two identical cards in as few moves as possible."
+            "Tap or click on a card to reveal its symbol.",
+            "Find and match two identical cards before flipping new ones.",
+            "Complete the grid using the fewest possible moves."
         ],
         scoring: [
-            "Correct Matches: Earn points for each successful match.",
+            "Match Points: Each correct match earns points.",
             "Efficiency Bonus: Fewer moves result in a higher score."
         ],
         tips: [
-            "Memorize card positions after each flip.",
-            "Match pairs quickly to earn bonus points."
+            "Memorize card locations to make matches faster.",
+            "Avoid flipping unnecessary cards to optimize your score."
         ]
     },
     {
         name: "Reaction Rush",
-        description: "Test your reaction time by tapping the screen as soon as the signal appears.",
+        description: "Test your reflexes by tapping instantly as soon as the signal appears.",
         howToPlay: [
-            "Wait for the 'GO' signal to appear on the screen.",
-            "Tap as quickly as possible once the signal shows up."
+            "Focus on the screen and wait for the 'GO' signal.",
+            "Tap as quickly as possible when the signal appears.",
+            "Avoid tapping before the signal to prevent penalties."
         ],
         scoring: [
-            "Speed Bonus: Faster reactions earn more points.",
-            "Accuracy: Premature taps result in a penalty."
+            "Speed Bonus: Faster reactions grant higher scores.",
+            "Accuracy: Premature taps lead to score deductions."
         ],
         tips: [
-            "Stay focused and avoid distractions.",
-            "React quickly but avoid false starts."
+            "Maintain concentration and avoid distractions.",
+            "Be ready, but don’t react impulsively before the signal."
         ]
     },
     {
         name: "Word Scramble",
-        description: "Rearrange scrambled letters to form the correct word before time runs out.",
+        description: "Rearrange a set of scrambled letters to form the correct word before the timer expires.",
         howToPlay: [
-            "Look at the jumbled letters displayed on the screen.",
-            "Drag or type the letters to form the correct word."
+            "Analyze the given jumbled letters.",
+            "Rearrange the letters in the correct sequence to form a valid word.",
+            "Submit your answer before the time limit runs out."
         ],
         scoring: [
-            "Speed: Faster answers give more points.",
-            "Correctness: Incorrect words result in no points."
+            "Speed Bonus: Faster solutions yield higher points.",
+            "Correctness: Incorrect answers result in no points."
         ],
         tips: [
-            "Look for common prefixes and suffixes.",
-            "Start with short words to gain confidence."
+            "Identify common prefixes and suffixes first.",
+            "Rearrange the letters mentally before moving them physically."
         ]
     },
     {
         name: "Quick Math",
-        description: "Solve simple math problems as quickly as possible.",
+        description: "Solve simple but time-sensitive math problems as accurately as possible.",
         howToPlay: [
-            "Read the math question displayed on the screen.",
-            "Choose the correct answer before time runs out."
+            "Read the displayed mathematical equation.",
+            "Choose or type the correct answer before time expires.",
+            "Progress through increasing levels of difficulty."
         ],
         scoring: [
-            "Speed Bonus: Faster responses yield more points.",
-            "Correctness: Wrong answers deduct points."
+            "Speed Bonus: Faster calculations yield more points.",
+            "Correctness: Wrong answers deduct points from your score."
         ],
         tips: [
-            "Practice mental math to improve speed.",
-            "Don't rush too much to avoid mistakes."
+            "Practice mental arithmetic to increase response speed.",
+            "Avoid rushing—accuracy is just as important as speed."
+        ]
+    },
+    {
+        name: "Pattern Recall",
+        description: "Memorize and replicate a sequence of visual patterns within a limited time.",
+        howToPlay: [
+            "Watch the pattern that appears on the screen.",
+            "Recreate the pattern by selecting elements in the correct order.",
+            "Sequences become longer and more complex as levels progress."
+        ],
+        scoring: [
+            "Accuracy Bonus: Exact replication earns maximum points.",
+            "Level Progression: More complex patterns award higher points."
+        ],
+        tips: [
+            "Break patterns into smaller sections for easier recall.",
+            "Use rhythm or visual association techniques to aid memory."
+        ]
+    },
+    {
+        name: "Shape Sorter",
+        description: "Sort falling geometric shapes into the correct categories before they reach the bottom.",
+        howToPlay: [
+            "Observe the falling shapes and determine their category.",
+            "Swipe or drag them into the correct section before they fall.",
+            "Speed and complexity increase with each level."
+        ],
+        scoring: [
+            "Correct Sorting: Each accurate placement grants points.",
+            "Speed Bonus: Faster sorting yields score multipliers."
+        ],
+        tips: [
+            "Focus on color, edges, and size for quick recognition.",
+            "Stay calm and methodical as the game speeds up."
         ]
     }
 ];
-
-
-// const InstructionsPage = ({ setmovePages }) => {
-//     const [openIndex, setOpenIndex] = useState(null);
-
-//     const toggleGame = (index) => {
-//         setOpenIndex(openIndex === index ? null : index);
-//     };
-
-//     return (
-//         <div className="container-fluid p-4 min-vh-100" style={{ background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)" }}>
-//             <h1 className="text-center mb-4 fw-bold text-uppercase text-warning display-3 shadow-lg">Game Instructions</h1>
-//             <div className="accordion" id="instructionsAccordion">
-//                 {gamesData.map((game, index) => (
-//                     <div className="accordion-item bg-dark text-light mb-4 rounded shadow-lg border border-light" key={index}>
-//                         <h2 className="accordion-header">
-//                             <button
-//                                 className={`accordion-button ${openIndex === index ? '' : 'collapsed'} bg-warning text-dark fw-bold border-0 shadow-lg`}
-//                                 type="button"
-//                                 onClick={() => toggleGame(index)}
-//                             >
-//                                 {game.name}
-//                             </button>
-//                         </h2>
-//                         <div className={`accordion-collapse collapse ${openIndex === index ? 'show' : ''}`}>
-//                             <div className="accordion-body p-4 bg-light text-dark rounded shadow-lg">
-//                                 <p className="fw-bold text-danger lead fs-5">{game.description}</p>
-//                                 <h4 className="text-primary border-bottom pb-2">How to Play</h4>
-//                                 <ul className="list-unstyled">
-//                                     {game.howToPlay.map((step, i) => <li key={i} className="py-2">✔ {step}</li>)}
-//                                 </ul>
-//                                 <h4 className="text-success border-bottom pb-2">Scoring Rules</h4>
-//                                 <ul className="list-unstyled">
-//                                     {game.scoring.map((rule, i) => <li key={i} className="py-2">🏆 {rule}</li>)}
-//                                 </ul>
-//                                 <h4 className="text-warning border-bottom pb-2">Tips for Success</h4>
-//                                 <ul className="list-unstyled">
-//                                     {game.tips.map((tip, i) => <li key={i} className="py-2">💡 {tip}</li>)}
-//                                 </ul>
-//                                 <button
-//                                     className="btn btn-lg btn-danger w-100 mt-3 shadow-lg rounded-pill fw-bold text-uppercase"
-//                                     onClick={() => setmovePages(index + 1)}
-//                                 >
-//                                     🎮 Play {game.name}
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default InstructionsPage;
 
 const InstructionsPage = ({ setmovePages }) => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -182,20 +167,24 @@ const InstructionsPage = ({ setmovePages }) => {
     };
 
     return (
-        <div className="container py-5 min-vh-100 d-flex flex-column align-items-center bg-white">
-            <h1 className="text-primary fw-bold text-uppercase mb-4">Game Instructions</h1>
+        <div className="container py-5 min-vh-100 d-flex flex-column align-items-center bg-light">
+            <h1 className="text-dark fw-bold text-uppercase mb-4">Game Instructions</h1>
             
-            <div className="w-100" style={{ maxWidth: "600px" }}>
+            <div className="accordion w-100" id="gameInstructions" style={{ maxWidth: "700px" }}>
                 {gamesData.map((game, index) => (
-                    <div key={index} className="card mb-3 shadow-sm border-0 instruction-card">
-                        <div className="card-header bg-primary text-white fw-bold" onClick={() => toggleGame(index)}>
-                            {game.name}
-                            <span className="float-end">{openIndex === index ? "▲" : "▼"}</span>
-                        </div>
-                        
-                        {openIndex === index && (
-                            <div className="card-body bg-light">
-                                <p className="fw-semibold text-muted">{game.description}</p>
+                    <div key={index} className="accordion-item border-0 shadow-sm mb-3 rounded">
+                        <h2 className="accordion-header">
+                            <button 
+                                className={`accordion-button ${openIndex === index ? '' : 'collapsed'} fw-bold bg-primary text-white`} 
+                                type="button" 
+                                onClick={() => toggleGame(index)}
+                            >
+                                {game.name}
+                            </button>
+                        </h2>
+                        <div className={`accordion-collapse collapse ${openIndex === index ? 'show' : ''}`}>
+                            <div className="accordion-body bg-white p-3">
+                                <p className="fw-semibold text-dark">{game.description}</p>
                                 
                                 <h5 className="text-primary">How to Play</h5>
                                 <ul className="list-group mb-3">
@@ -225,7 +214,7 @@ const InstructionsPage = ({ setmovePages }) => {
                                     🎮 Play {game.name}
                                 </button>
                             </div>
-                        )}
+                        </div>
                     </div>
                 ))}
             </div>
