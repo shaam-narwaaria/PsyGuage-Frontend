@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HouseFill, PersonFill, Joystick, BookFill } from "react-bootstrap-icons";
 
 const Navbar = ({ setmovePages }) => {
+  useEffect(() => {
+    document.body.style.paddingTop = "65px";   // Prevents content from being hidden by top navbar
+    document.body.style.paddingBottom = "70px"; // Prevents content from being hidden by bottom navbar
+  }, []);
+
   const handleNavigation = (page) => {
     setmovePages(page);
   };
@@ -28,10 +33,10 @@ const Navbar = ({ setmovePages }) => {
         style={{ backgroundColor: "#2575fc", height: "70px" }}>
         <div className="container d-flex justify-content-around">
           {[
-            { icon: <HouseFill size={22} className="text-light" />, label: "Home", page: 6 },
-            { icon: <PersonFill size={22} className="text-light" />, label: "Profile", page: 4 },
-            { icon: <Joystick size={22} className="text-light" />, label: "Games", page: 1 },
-            { icon: <BookFill size={22} className="text-light" />, label: "Instructions", page: 11 },
+            { icon: <HouseFill size={18} className="text-light" />, label: "Home", page: 6 },
+            { icon: <PersonFill size={18} className="text-light" />, label: "Profile", page: 4 },
+            { icon: <Joystick size={18} className="text-light" />, label: "Games", page: 1 },
+            { icon: <BookFill size={18} className="text-light" />, label: "Instructions", page: 11 },
           ].map((item, index) => (
             <button 
               key={index} 
