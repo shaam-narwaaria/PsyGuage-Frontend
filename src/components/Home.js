@@ -179,7 +179,7 @@ function Home({ setmovePages }) {
 
 
             {/* Testimonials Section */}
-            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg, #e0f7fa, #ffffff)" }}>
+            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg,rgb(163, 244, 255),rgb(251, 200, 200))" }}>
                 <div className="container">
                     <h2 className="text-start text-dark fw-bold mb-5">What Our Users Say</h2>
                     <div className="row g-4">
@@ -209,7 +209,8 @@ function Home({ setmovePages }) {
 
 
             {/* FAQ Section */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#ffe5e5" }}>
+            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg,rgb(180, 237, 189),rgb(31, 248, 255))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+
                 <div className="container">
                     <h2 className="fw-bold mb-4 text-dark">Frequently Asked Questions</h2>
                     <p className="text-muted">Find answers to common queries about PsyGauge.</p>
@@ -245,21 +246,39 @@ function Home({ setmovePages }) {
 
 
             {/* Newsletter Subscription */}
-            <section className="container my-5 text-center">
-                <h2 className="fw-bold text-primary">Stay Updated 📩</h2>
-                <p className="text-muted">Subscribe to our newsletter for the latest insights and game updates.</p>
-                <form className="d-flex justify-content-center">
-                    <input type="email" className="form-control w-50" placeholder="Enter your email" />
-                    <button type="submit" className="btn btn-primary ms-2">Subscribe</button>
-                </form>
+            <section className="container-fluid py-5 rounded" style={{ background: "linear-gradient(135deg,rgb(139, 199, 251),rgb(248, 255, 31))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
+                        <h2 className="fw-bold text-primary">📩 Stay Updated</h2>
+                        <p className="text-muted fs-5">Subscribe to our newsletter for the latest insights and game updates.</p>
+
+                        <form className="row g-2 justify-content-center">
+                            <div className="col-12 col-md-7">
+                                <input
+                                    type="email"
+                                    className="form-control rounded p-3 shadow-sm"
+                                    placeholder="Enter your email"
+                                    required
+                                />
+                            </div>
+                            <div className="col-12 col-md-auto">
+                                <button type="submit" className="btn btn-primary rounded px-4 py-3 fw-bold shadow-sm">
+                                    Subscribe 🚀
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </section>
+
+
 
 
 
 
             {/* Footer */}
             <footer className="text-white text-center py-4"
-                style={{ background: "linear-gradient(135deg,rgb(0, 170, 255),rgb(0, 128, 255))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+                style={{ background: "linear-gradient(135deg,rgb(64, 90, 114),rgb(40, 125, 27))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
                 <div className="container">
                     <p className="mb-3" style={{ fontSize: "14px", opacity: "0.8" }}>
                         &copy; {new Date().getFullYear()} PsyGauge. All rights reserved.
@@ -270,12 +289,12 @@ function Home({ setmovePages }) {
                             onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaTwitter size={20} />
                         </a>
-                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                        <a href="https://www.linkedin.com/in/shambhoolal-narwaria/" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
                             onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
                             onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaLinkedin size={20} />
                         </a>
-                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                        <a href="mailto:snarwaria195mb@gmail.com" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
                             onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
                             onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaEnvelope size={20} />

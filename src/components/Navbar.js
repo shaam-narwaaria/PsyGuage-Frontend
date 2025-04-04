@@ -4,8 +4,8 @@ import { HouseFill, PersonFill, Joystick, BookFill } from "react-bootstrap-icons
 
 const Navbar = ({ setmovePages }) => {
   useEffect(() => {
-    document.body.style.paddingTop = "60px";   // Prevents content from being hidden by top navbar
-    document.body.style.paddingBottom = "65px"; // Prevents content from being hidden by bottom navbar
+    document.body.style.paddingTop = "64px";   // Prevents content from being hidden by top navbar
+    document.body.style.paddingBottom = "69px"; // Prevents content from being hidden by bottom navbar
   }, []);
 
   const handleNavigation = (page) => {
