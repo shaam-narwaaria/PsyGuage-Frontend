@@ -168,7 +168,7 @@ const InstructionsPage = ({ setmovePages }) => {
 
     return (
         <div className="container py-5 min-vh-100 d-flex flex-column align-items-center bg-light">
-            <h1 className="text-dark fw-bold text-uppercase mb-4">Game Instructions</h1>
+            <h1 className="text-dark fw-bold mb-4">Game Instructions</h1>
             
             <div className="accordion w-100" id="gameInstructions" style={{ maxWidth: "700px" }}>
                 {gamesData.map((game, index) => (
@@ -208,7 +208,7 @@ const InstructionsPage = ({ setmovePages }) => {
                                 </ul>
 
                                 <button
-                                    className="btn btn-lg btn-primary w-100 fw-bold"
+                                    className="btn btn-success btn-lg w-100"
                                     onClick={() => setmovePages(index + 1)}
                                 >
                                     🎮 Play {game.name}

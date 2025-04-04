@@ -24,7 +24,7 @@ const Navbar = ({ setmovePages }) => {
         <div className="container-fluid d-flex align-items-center">
           {/* Logo Icon */}
           <span className="navbar-brand fw-bold fs-3 text-light d-flex align-items-center">
-            <img src="logo.png" alt="Logo" width="40" height="40" className="me-2" />
+            <img src="logo1.png" alt="Logo" width="80" height="40" className="me-2" />
             Psy<span className="text-warning">Gauge</span>
           </span>
         </div>
