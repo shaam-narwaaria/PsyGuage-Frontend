@@ -15,7 +15,7 @@ const Navbar = ({ setmovePages }) => {
   return (
     <>
       {/* 🔹 Top Navbar */}
-      <nav className="navbar navbar-dark fixed-top shadow-sm py-2 rounded-bottom"
+      {/* <nav className="navbar navbar-dark fixed-top shadow-sm py-2 rounded-bottom"
         style={{
           background: "linear-gradient(135deg, #6a11cb, #2575fc)",
           height: "65px",
@@ -26,7 +26,24 @@ const Navbar = ({ setmovePages }) => {
             Psy<span className="text-warning">Gauge</span>
           </span>
         </div>
+      </nav> */}
+
+      {/* 🔹 Enhanced Top Navbar */}
+      <nav className="navbar navbar-dark fixed-top shadow-lg py-2 rounded-bottom"
+        style={{
+          background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+          height: "70px",
+          borderBottom: "3px solid rgba(255, 255, 255, 0.3)"
+        }}>
+        <div className="container-fluid d-flex align-items-center">
+          {/* Logo Icon */}
+          <span className="navbar-brand fw-bold fs-3 text-light d-flex align-items-center">
+            <img src="logo.png" alt="Logo" width="50" height="50" className="me-2" />
+            Psy<span className="text-warning">Gauge</span>
+          </span>
+        </div>
       </nav>
+
 
       {/* 🔹 Bottom Navigation Bar */}
       <nav className="navbar navbar-light fixed-bottom shadow-lg border-top py-2 rounded-top"
@@ -38,8 +55,8 @@ const Navbar = ({ setmovePages }) => {
             { icon: <Joystick size={18} className="text-light" />, label: "Games", page: 1 },
             { icon: <BookFill size={18} className="text-light" />, label: "Instructions", page: 11 },
           ].map((item, index) => (
-            <button 
-              key={index} 
+            <button
+              key={index}
               className="btn d-flex flex-column align-items-center text-light fw-bold"
               onClick={() => handleNavigation(item.page)}
             >
