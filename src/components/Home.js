@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import "./Home.css";
 
@@ -13,36 +14,53 @@ function Home({ setmovePages }) {
 
     return (
         <div className="container-fluid p-0">
+
             {/* Hero Section */}
-            <header className="home-hero text-white d-flex align-items-center py-5">
+            <header className="text-white d-flex align-items-center py-5"
+                style={{ background: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)", minHeight: "85vh" }}>
+
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-12 col-md-8">
-                            <h1 className="fw-bold display-4 text-start">
-                                Welcome to <span className="text-gradient">PsyGauge</span>
+                        {/* Left Content */}
+                        <div className="col-12 col-md-7">
+                            <h1 className="fw-bold display-5 text-start">
+                                Welcome to <span className="text-warning">PsyGauge</span>
                             </h1>
+
                             <p className="lead text-start">
                                 Revolutionizing candidate assessment through <span className="fw-bold">interactive psychometric games.</span>
-                                Test skills like <span className="text-highlight">multitasking</span>, <span className="text-highlight">problem-solving</span>, and <span className="text-highlight">reaction time</span>.
+                                Test skills like <span className="text-warning">multitasking</span>, <span className="text-warning">problem-solving</span>, and <span className="text-warning">reaction time</span>.
                             </p>
+
+                            {/* Bullet Points with Blue Tick Icons */}
                             <ul className="list-unstyled fw-bold text-start">
-                                <li>✅ Scientifically designed tests</li>
-                                <li>✅ Instant performance insights</li>
-                                <li>✅ Trusted by professionals & recruiters</li>
+                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Scientifically designed tests</li>
+                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Instant performance insights</li>
+                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Trusted by professionals & recruiters</li>
                             </ul>
+
+                            {/* Centered Button */}
+                            <div className="d-flex justify-content-center mt-4">
+                                <button className="btn btn-lg btn-light shadow-lg fw-bold px-5 py-3" onClick={() => setmovePages(1)}>
+                                    Start Your Journey 🚀
+                                </button>
+                            </div>
+
+                            <p className="mt-3 small text-center">No registration required. Try it now!</p>
+                        </div>
+
+                        {/* Right-Side Image (Hidden on Mobile) */}
+                        <div className="col-12 col-md-5 d-none d-md-flex justify-content-md-end">
+                            <img src="/symbol.png" alt="Hero Section"
+                                className="img-fluid rounded-3 shadow-lg"
+                                style={{ maxWidth: "85%", height: "auto" }} />
                         </div>
                     </div>
-
-                    {/* Centered Button */}
-                    <div className="d-flex justify-content-center mt-4">
-                        <button className="btn btn-lg btn-light shadow-lg fw-bold px-5" onClick={() => setmovePages(1)}>
-                            Start Your Journey 🚀
-                        </button>
-                    </div>
-
-                    <p className="mt-3 small text-start">No registration required. Try it now!</p>
                 </div>
             </header>
+
+
+
 
 
 
@@ -50,9 +68,9 @@ function Home({ setmovePages }) {
             <section className="container-fluid py-5" style={{ backgroundColor: "#fdba74" }}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-md-8">
-                            <h2 className="fw-bold mb-4 text-dark text-md-start text-center">Why Choose PsyGauge?</h2>
-                            <p className="text-dark mb-5 text-md-start text-center">
+                        <div className="col-12">
+                            <h2 className="fw-bold mb-4 text-dark text-start">Why Choose PsyGauge?</h2>
+                            <p className="text-dark mb-5 text-start">
                                 We offer <span className="fw-bold text-primary">science-backed cognitive assessments</span> that are interactive, insightful, and fun!
                                 Whether you're an individual looking to enhance your mental agility or a company seeking top talent—PsyGauge is your <span className="fw-bold">ultimate assessment tool</span>.
                             </p>
@@ -69,7 +87,7 @@ function Home({ setmovePages }) {
                             { icon: "📈", title: "Track & Compare Progress", desc: "Monitor your improvement and compare with industry benchmarks.", bgColor: "#FFDDDF" },
                         ].map((feature, index) => (
                             <div key={index} className="col-12 col-md-6 col-lg-4">
-                                <div className="feature-card shadow-lg p-4 rounded-3 position-relative text-md-start text-center"
+                                <div className="feature-card shadow-lg p-4 rounded-3 position-relative text-start"
                                     style={{ backgroundColor: feature.bgColor }}>
                                     <div className="feature-icon display-4 mb-3 text-primary">{feature.icon}</div>
                                     <h5 className="fw-bold text-dark">{feature.title}</h5>
@@ -81,121 +99,142 @@ function Home({ setmovePages }) {
                 </div>
             </section>
 
-
-
             {/* How It Works */}
-            {/* <section className="container-fluid py-5" style={{ backgroundColor: "#818cf8" }}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#818cf8" }}>
                 <div className="container">
-                    <h2 className="text-start fw-bold mb-3 text-dark">How PsyGauge Works</h2>
-                    <p className="text-start text-muted mb-4">
-                        A step-by-step journey to mastering your cognitive skills.
-                    </p>
+                    <div className="row">
+                        <div className="col-12">
+                            <h2 className="fw-bold mb-4 text-dark text-start">How PsyGauge Works</h2>
+                            <p className="text-dark mb-5 text-start">
+                                A step-by-step journey to mastering your cognitive skills.
+                            </p>
+                        </div>
+                    </div>
 
                     <div className="row g-4">
                         {[
-                            { step: "1", title: "Play Engaging Games", desc: "Challenge yourself with fun, scientifically designed psychometric games.", icon: "🎯" },
-                            { step: "2", title: "Analyze Performance", desc: "AI-driven analytics help you understand your strengths and areas of growth.", icon: "📈" },
-                            { step: "3", title: "Enhance Your Skills", desc: "Use personalized insights to boost memory, reaction time, and focus.", icon: "🏆" },
-                            { step: "4", title: "Track Your Growth", desc: "Monitor your cognitive progress over time with real-time performance tracking.", icon: "📅" },
-                            { step: "5", title: "Compete & Share", desc: "Compare scores with friends and professionals to stay motivated.", icon: "🤝" },
+                            { icon: "🎯", title: "Play Engaging Games", desc: "Challenge yourself with fun, scientifically designed psychometric games.", bgColor: "#D6E6F2" },
+                            { icon: "📈", title: "Analyze Performance", desc: "AI-driven analytics help you understand your strengths and areas of growth.", bgColor: "#D4EDDA" },
+                            { icon: "🏆", title: "Enhance Your Skills", desc: "Use personalized insights to boost memory, reaction time, and focus.", bgColor: "#E3D7FF" },
+                            { icon: "📅", title: "Track Your Growth", desc: "Monitor your cognitive progress over time with real-time performance tracking.", bgColor: "#FFE5B4" },
+                            { icon: "🤝", title: "Compete & Share", desc: "Compare scores with friends and professionals to stay motivated.", bgColor: "#FFDDDF" },
                         ].map((item, index) => (
                             <div key={index} className="col-12 col-md-6 col-lg-4">
-                                <div className="shadow-lg p-4 rounded-4 bg-white text-start position-relative">
-                                    <div className="d-flex align-items-center mb-3">
-                                        <span className="display-6 me-3">{item.icon}</span>
-                                        <h5 className="fw-bold mb-0">{item.title}</h5>
-                                    </div>
+                                <div className="feature-card shadow-lg p-4 rounded-3 position-relative text-start"
+                                    style={{ backgroundColor: item.bgColor }}>
+                                    <div className="feature-icon display-4 mb-3 text-primary">{item.icon}</div>
+                                    <h5 className="fw-bold text-dark">{item.title}</h5>
                                     <p className="text-muted">{item.desc}</p>
-                                    <div className="progress mt-3" style={{ height: "5px" }}>
-                                        <div className="progress-bar bg-primary" style={{ width: `${(index + 1) * 20}%` }}></div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+
+            {/* Explore Games Section */}
+            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg, #ffafbd, #ffc3a0)" }}>
+                <div className="container">
+                    <h2 className="text-start text-dark fw-bold mb-4">Explore Our Games</h2>
+                    <div className="row g-4">
+                        {[
+                            { img: "/trackp.jpg", title: "Multitasking Challenge", desc: "Test your ability to handle multiple tasks efficiently." },
+                            { img: "/missingp.jpg", title: "Problem Solver", desc: "Sharpen your logical thinking and problem-solving skills." },
+                            { img: "/clickp.jpg", title: "Reaction Timer", desc: "Measure your speed and accuracy in real-time." },
+                            { img: "/trackp.jpg", title: "Recall Power", desc: "Boost your memory recall and cognitive function." },
+                            { img: "/trackp.jpg", title: "Decision Maker", desc: "Enhance your decision-making under pressure." }
+                        ].map((game, index) => (
+                            <div key={index} className="col-12 col-sm-6 col-lg-4">
+                                <div className="card border-0 shadow-lg rounded-4 overflow-hidden"
+                                    style={{ background: "#ffffff", transition: "transform 0.3s ease-in-out" }}
+                                    onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+                                    onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+                                >
+                                    {/* Image Wrapper */}
+                                    <div className="position-relative" style={{ height: "100px", overflow: "hidden" }}>
+                                        <img src={game.img} alt={game.title}
+                                            className="w-100 h-100 object-fit-cover"
+                                            style={{ maxHeight: "160px" }} // Reduced height
+                                        />
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="card-body text-start p-4">
+                                        <h5 className="card-title fw-bold text-primary">{game.title}</h5>
+                                        <p className="card-text text-secondary">{game.desc}</p>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </section> */}
-            
-
-            {/* How It Works */}
-<section className="container-fluid py-5" style={{ backgroundColor: "#818cf8" }}>
-    <div className="container">
-        <div className="row">
-            <div className="col-12 col-md-8">
-                <h2 className="fw-bold mb-4 text-dark text-md-start text-center">How PsyGauge Works</h2>
-                <p className="text-dark mb-5 text-md-start text-center">
-                    A step-by-step journey to mastering your cognitive skills.
-                </p>
-            </div>
-        </div>
-
-        <div className="row g-4">
-            {[
-                { icon: "🎯", title: "Play Engaging Games", desc: "Challenge yourself with fun, scientifically designed psychometric games.", bgColor: "#D6E6F2" },
-                { icon: "📈", title: "Analyze Performance", desc: "AI-driven analytics help you understand your strengths and areas of growth.", bgColor: "#D4EDDA" },
-                { icon: "🏆", title: "Enhance Your Skills", desc: "Use personalized insights to boost memory, reaction time, and focus.", bgColor: "#E3D7FF" },
-                { icon: "📅", title: "Track Your Growth", desc: "Monitor your cognitive progress over time with real-time performance tracking.", bgColor: "#FFE5B4" },
-                { icon: "🤝", title: "Compete & Share", desc: "Compare scores with friends and professionals to stay motivated.", bgColor: "#FFDDDF" },
-            ].map((item, index) => (
-                <div key={index} className="col-12 col-md-6 col-lg-4">
-                    <div className="feature-card shadow-lg p-4 rounded-3 position-relative text-md-start text-center"
-                        style={{ backgroundColor: item.bgColor }}>
-                        <div className="feature-icon display-4 mb-3 text-primary">{item.icon}</div>
-                        <h5 className="fw-bold text-dark">{item.title}</h5>
-                        <p className="text-muted">{item.desc}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
+            </section>
 
 
-
-
-            {/* Games Section with Hover Effects */}
-            <section className="container my-5">
-                <h2 className="text-center text-primary fw-bold">Explore Our Games</h2>
-                <div className="row g-4">
-                    {[
-                        { img: "/trackp.jpg", title: "Multitasking Challenge", desc: "Manage multiple tasks effectively." },
-                        { img: "/missingp.jpg", title: "Problem Solver", desc: "Sharpen your analytical skills." },
-                        { img: "/clickp.jpg", title: "Reaction Timer", desc: "Test your speed & accuracy." },
-                        { img: "/starp.jpg", title: "Recall Power", desc: "Enhance memory recall skills." },
-                        { img: "/starp.jpg", title: "Decision Maker", desc: "Improve real-time decision-making." }
-                    ].map((game, index) => (
-                        <div key={index} className="col-12 col-md-6 col-lg-4">
-                            <div className="card home-game-card border-0 shadow-lg position-relative">
-                                <img src={game.img} alt={game.title} className="card-img-top rounded-top" />
-                                <div className="card-body text-center game-card-overlay">
-                                    <h5 className="card-title fw-bold">{game.title}</h5>
-                                    <p className="card-text text-muted">{game.desc}</p>
+            {/* Testimonials Section */}
+            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg, #e0f7fa, #ffffff)" }}>
+                <div className="container">
+                    <h2 className="text-start text-dark fw-bold mb-5">What Our Users Say</h2>
+                    <div className="row g-4">
+                        {[
+                            { img: "/images/user1.jpeg", name: "Sarah L.", feedback: "PsyGauge improved my problem-solving skills!" },
+                            { img: "/images/user2.jpeg", name: "James K.", feedback: "Amazing experience! The games are engaging and insightful." },
+                            { img: "/images/user3.jpeg", name: "Emily R.", feedback: "Highly recommend for cognitive development!" }
+                        ].map((review, index) => (
+                            <div key={index} className="col-12 col-md-4">
+                                <div className="testimonial-card shadow-sm p-4 rounded-4 bg-white d-flex align-items-start">
+                                    {/* Avatar */}
+                                    <img src={review.img} alt={review.name}
+                                        className="rounded-circle border border-2 border-primary me-3"
+                                        width="60" height="60"
+                                    />
+                                    {/* Text Content */}
+                                    <div>
+                                        <p className="text-secondary fst-italic mb-1">"{review.feedback}"</p>
+                                        <h6 className="fw-bold text-primary mt-2">{review.name}</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
 
-            {/* Testimonials with Avatars */}
-            <section className="container my-5">
-                <h2 className="text-center text-primary fw-bold">What Our Users Say</h2>
-                <div className="row text-center g-4">
-                    {[
-                        { img: "/user1.jpg", name: "Sarah L.", feedback: "PsyGauge improved my problem-solving skills!" },
-                        { img: "/user2.jpg", name: "James K.", feedback: "Amazing experience! The games are engaging and insightful." },
-                        { img: "/user3.jpg", name: "Emily R.", feedback: "Highly recommend for cognitive development!" }
-                    ].map((review, index) => (
-                        <div key={index} className="col-12 col-md-4">
-                            <div className="testimonial-card shadow-lg p-4">
-                                <img src={review.img} alt={review.name} className="rounded-circle mb-3" width="80" />
-                                <p className="text-muted">"{review.feedback}"</p>
-                                <h6 className="fw-bold">{review.name}</h6>
+
+            {/* FAQ Section */}
+            <section className="container-fluid py-5" style={{ backgroundColor: "#ffe5e5" }}>
+                <div className="container">
+                    <h2 className="fw-bold mb-4 text-dark">Frequently Asked Questions</h2>
+                    <p className="text-muted">Find answers to common queries about PsyGauge.</p>
+
+                    <div className="accordion" id="faqAccordion">
+                        {[
+                            { question: "What is PsyGauge?", answer: "PsyGauge is a platform that uses interactive psychometric games to assess cognitive skills." },
+                            { question: "Who can use PsyGauge?", answer: "Anyone looking to improve cognitive skills or employers seeking data-driven assessments." },
+                            { question: "Is PsyGauge free to use?", answer: "Yes! You can try our games for free without registration." },
+                            { question: "How are results calculated?", answer: "Our AI-powered system analyzes your game performance and provides detailed insights." },
+                            { question: "Can companies use PsyGauge for hiring?", answer: "Absolutely! PsyGauge helps employers assess candidates beyond traditional resumes." }
+                        ].map((faq, index) => (
+                            <div className="accordion-item border-0 rounded-3 mb-3 shadow-sm" key={index} style={{ backgroundColor: "#fff" }}>
+                                <h2 className="accordion-header">
+                                    <button
+                                        className={`accordion-button ${openIndex === index ? "" : "collapsed"} bg-white fw-bold`}
+                                        type="button"
+                                        onClick={() => toggleFAQ(index)}
+                                    >
+                                        {faq.question}
+                                    </button>
+                                </h2>
+                                <div className={`accordion-collapse collapse ${openIndex === index ? "show" : ""}`}>
+                                    <div className="accordion-body text-muted">{faq.answer}</div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
+
 
             {/* Newsletter Subscription */}
             <section className="container my-5 text-center">
@@ -207,23 +246,36 @@ function Home({ setmovePages }) {
                 </form>
             </section>
 
+
+
+
             {/* Footer */}
-            <footer className="home-footer text-white text-center py-4">
+            <footer className="text-white text-center py-4"
+                style={{ background: "linear-gradient(135deg, #232526, #414345)", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
                 <div className="container">
-                    <p className="mb-3">&copy; {new Date().getFullYear()} PsyGauge. All rights reserved.</p>
+                    <p className="mb-3" style={{ fontSize: "14px", opacity: "0.8" }}>
+                        &copy; {new Date().getFullYear()} PsyGauge. All rights reserved.
+                    </p>
                     <div>
-                        <a href="#" className="text-white mx-2">
+                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaTwitter size={20} />
                         </a>
-                        <a href="#" className="text-white mx-2">
+                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaLinkedin size={20} />
                         </a>
-                        <a href="#" className="text-white mx-2">
+                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
                             <FaEnvelope size={20} />
                         </a>
                     </div>
                 </div>
             </footer>
+
         </div>
     );
 }
