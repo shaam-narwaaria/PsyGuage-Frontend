@@ -225,7 +225,7 @@ function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-success w-100"
-                      onClick={() => submitScore("Pinball Recall")}
+                      onClick={() => submitScore("pinballcounter")}
                     >
                       Play Now
                     </NavLink>
@@ -249,7 +249,7 @@ function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-success w-100"
-                      onClick={() => submitScore("Track of Thought")}
+                      onClick={() => submitScore("thoughtgame")}
                     >
                       Play Now
                     </NavLink>
