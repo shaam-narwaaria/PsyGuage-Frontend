@@ -245,7 +245,7 @@ function App() {
                   <div className="card-body d-flex flex-column justify-content-between">
                     <h6 className="card-title fw-bold mb-3">Track of Thought</h6>
                     <NavLink
-                      to="https://track-of-thought-web.ea9c.com/"
+                      to="https://track-of-thought-web.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-success w-100"
@@ -257,7 +257,29 @@ function App() {
                 </div>
               </div>
 
-
+              {/* Track of Thought Game */}
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="card h-100 text-center border-0 shadow rounded-4">
+                  <img
+                    src="/pinv.jpg"
+                    alt="Open Track of Thought Game"
+                    className="card-img-top rounded-top"
+                    style={{ height: "100px", objectFit: "cover" }}
+                  />
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <h6 className="card-title fw-bold mb-3">Memory Matrix</h6>
+                    <NavLink
+                      to="https://mehdiahmadov.github.io/memory_matrix/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-success w-100"
+                      onClick={() => submitScore("memorymatrix")}
+                    >
+                      Play Now
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
 
 
             </div>
