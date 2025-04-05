@@ -54,7 +54,7 @@
 
 //       {/* ✅ Suspense for Lazy Loading Components */}
 //       <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
-        
+
 //         {/* ✅ Home Page */}
 //         {movePages === 6 && <Home setmovePages={setmovePages} />}
 
@@ -94,7 +94,7 @@
 //         {movePages === 10 && <DigitsGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
 //         {movePages === 11 && <InstructionsPage userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
 //         {movePages === 12 && <StarSearchGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-        
+
 //       </Suspense>
 //     </div>
 //   );
@@ -162,31 +162,33 @@ function App() {
     localStorage.setItem("game_useremail", JSON.stringify(ADMIN_EMAIL));
   }, []);
 
-  // ✅ Submit Score Function
-  const submitScore = async () => {
+  // ✅ Global Score Submission Function
+  const submitScore = async (gameName) => {
     try {
       await axios.post(`${BASE_URL}/api/scores`, {
-        gameName: "pinballcounter",
+        gameName: gameName,
         name: ADMIN_NAME,
         email: ADMIN_EMAIL,
         score: Math.floor(Math.random() * 40),
       });
+      console.log(`✅ Score submitted for ${gameName}`);
     } catch (error) {
       console.error("Error submitting score:", error);
     }
   };
 
+
   return (
     <div className="bg-light min-vh-100">
       {/* ✅ Navbar */}
       <Navbar localName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} movePages={movePages} />
-  
+
       {/* ✅ Suspense for Lazy Loading Components */}
       <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
-        
+
         {/* ✅ Home Page */}
         {movePages === 6 && <Home setmovePages={setmovePages} />}
-  
+
         {/* ✅ Game Selection Page */}
         {movePages === 1 && (
           <div
@@ -199,14 +201,14 @@ function App() {
             <h2 className="text-center text-dark fw-bold mb-4 display-6">
               Explore Our Games
             </h2>
-  
+
             <div className="row g-4 justify-content-center">
               {gamesList.map((game, index) => (
                 <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
                   <GameCard {...game} onClick={() => setmovePages(game.pageId)} />
                 </div>
               ))}
-  
+
               {/* Pinball Recall Game */}
               <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div className="card h-100 text-center border-0 shadow rounded-4">
@@ -223,16 +225,45 @@ function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-success w-100"
+                      onClick={() => submitScore("Pinball Recall")}
                     >
                       Play Now
                     </NavLink>
                   </div>
                 </div>
               </div>
+
+              {/* Track of Thought Game */}
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="card h-100 text-center border-0 shadow rounded-4">
+                  <img
+                    src="/pinv.jpg"
+                    alt="Open Track of Thought Game"
+                    className="card-img-top rounded-top"
+                    style={{ height: "100px", objectFit: "cover" }}
+                  />
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <h6 className="card-title fw-bold mb-3">Track of Thought</h6>
+                    <NavLink
+                      to="https://track-of-thought-web.ea9c.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-success w-100"
+                      onClick={() => submitScore("Track of Thought")}
+                    >
+                      Play Now
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+
+
+
+
             </div>
           </div>
         )}
-  
+
         {/* ✅ Render Games */}
         {movePages === 2 && <SymbolGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
         {movePages === 3 && <QuickClickGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
@@ -247,7 +278,7 @@ function App() {
       </Suspense>
     </div>
   );
-  
+
 }
 
 // ✅ List of Games for Dynamic Rendering
