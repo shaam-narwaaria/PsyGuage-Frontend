@@ -231,7 +231,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
-import { Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UserProfile = ({ localName, localEmail, setmovePages }) => {
@@ -294,11 +293,12 @@ const UserProfile = ({ localName, localEmail, setmovePages }) => {
         <div className="user_profile py-4" style={{ background: 'linear-gradient(to right, #4facfe, #00f2fe)', minHeight: '100vh' }}>
             <div className="container">
                 {loading ? (
-                    <div className="text-center my-5">
-                        <img src="/loading-illustration.gif" alt="Loading" style={{ width: "200px", height: "200px" }} />
-                        <p className="text-white mt-2">Fetching your data...</p>
+                    <div className="d-flex flex-column align-items-center justify-content-center my-5">
+                    <div className="spinner-grow mb-3" role="status" style={{ width: "4rem", height: "4rem" }}>
+                      <span className="visually-hidden">Fetching your data...</span>
                     </div>
-
+                    <p className="text-muted fw-semibold">Fetching your data, please wait...</p>
+                  </div>
                 ) : (
                     <>
                         {data.length === 0 ? (
