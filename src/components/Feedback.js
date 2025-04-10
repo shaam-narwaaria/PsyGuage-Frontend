@@ -27,8 +27,7 @@ const Feedback = () => {
     <Container className="py-5 d-flex justify-content-center align-items-center">
       <div className="p-5 shadow-lg rounded-4 bg-light w-100" style={{ maxWidth: "600px" }}>
         <h2 className="mb-4 text-center text-primary fw-bold">
-          💬 We Value Your Feedback
-        </h2>
+        We Value Your Feedback </h2>
 
         {submitted && (
           <Alert variant="success" className="d-flex align-items-center gap-2 fade show">

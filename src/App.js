@@ -1,223 +1,12 @@
-// import React, { useEffect, useState, lazy, Suspense } from "react";
-// import axios from "axios";
-// import { NavLink } from "react-router-dom";
-// import Navbar from "./components/Navbar";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min";
-// import "./App.css";
-
-// // ✅ Lazy Load Game Components to Improve Performance
-// const Home = lazy(() => import("./components/Home"));
-// const SymbolGame = lazy(() => import("./components/SymbolGame"));
-// const QuickClickGame = lazy(() => import("./components/QuickClickGame"));
-// const BalloonGame = lazy(() => import("./components/BalloonGame"));
-// const MissingNumberGame = lazy(() => import("./components/MissingNumberGame"));
-// const TrackOfThoughtGame = lazy(() => import("./components/TrackOfThoughtGame"));
-// const ArrowGame = lazy(() => import("./components/ArrowGame"));
-// const DigitsGame = lazy(() => import("./components/DigitsGame"));
-// const StarSearchGame = lazy(() => import("./components/StarSearchGame"));
-// const UserProfile = lazy(() => import("./components/UserProfile"));
-// const InstructionsPage = lazy(() => import("./components/InstructionsPage"));
-
-// // ✅ Default Admin Credentials
-// const ADMIN_NAME = "Admin";
-// const ADMIN_EMAIL = "admin@gmail.com";
-// const BASE_URL = "https://psyguage-backend.onrender.com";
-
-// function App() {
-//   const [movePages, setmovePages] = useState(6); // ✅ Start from Home Page
-
-//   // ✅ Auto-store Admin credentials
-//   useEffect(() => {
-//     localStorage.setItem("game_username", JSON.stringify(ADMIN_NAME));
-//     localStorage.setItem("game_useremail", JSON.stringify(ADMIN_EMAIL));
-//   }, []);
-
-//   // ✅ Global Score Submission Function
-//   const submitScore = async (gameName) => {
-//     try {
-//       await axios.post(`${BASE_URL}/api/scores`, {
-//         gameName: gameName,
-//         name: ADMIN_NAME,
-//         email: ADMIN_EMAIL,
-//         score: Math.floor(Math.random() * 40),
-//       });
-//       console.log(`✅ Score submitted for ${gameName}`);
-//     } catch (error) {
-//       console.error("Error submitting score:", error);
-//     }
-//   };
-
-
-//   return (
-//     <div className="bg-light min-vh-100">
-//       {/* ✅ Navbar */}
-//       <Navbar localName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} movePages={movePages} />
-
-//       {/* ✅ Suspense for Lazy Loading Components */}
-//       <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
-
-//         {/* ✅ Home Page */}
-//         {movePages === 6 && <Home setmovePages={setmovePages} />}
-
-//         {/* ✅ Game Selection Page */}
-//         {movePages === 1 && (
-//           <div
-//             className="container-fluid py-4 px-3"
-//             style={{
-//               background: "linear-gradient(135deg,rgb(192, 247, 247),rgb(97, 249, 120))",
-//               minHeight: "100vh",
-//             }}
-//           >
-//             <h2 className="text-center text-dark fw-bold mb-4 display-6">
-//               Explore Our Games
-//             </h2>
-
-//             <div className="row g-4 justify-content-center">
-//               {gamesList.map((game, index) => (
-//                 <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
-//                   <GameCard {...game} onClick={() => setmovePages(game.pageId)} />
-//                 </div>
-//               ))}
-
-//               {/* Pinball Recall Game */}
-//               <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-//                 <div className="card h-100 text-center border-0 shadow rounded-4">
-//                   <img
-//                     src="/pinv.jpg"
-//                     alt="Open Pinball Recall Game"
-//                     className="card-img-top rounded-top"
-//                     style={{ height: "100px", objectFit: "cover" }}
-//                   />
-//                   <div className="card-body d-flex flex-column justify-content-between">
-//                     <h6 className="card-title fw-bold mb-3">🎯 Pinball Recall</h6>
-//                     <NavLink
-//                       to="https://open-pinball-recall.vercel.app/"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="btn btn-success w-100"
-//                       onClick={() => submitScore("pinballcounter")}
-//                     >
-//                       Play Now
-//                     </NavLink>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               {/* Track of Thought Game */}
-//               <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-//                 <div className="card h-100 text-center border-0 shadow rounded-4">
-//                   <img
-//                     src="/pinv.jpg"
-//                     alt="Open Track of Thought Game"
-//                     className="card-img-top rounded-top"
-//                     style={{ height: "100px", objectFit: "cover" }}
-//                   />
-//                   <div className="card-body d-flex flex-column justify-content-between">
-//                     <h6 className="card-title fw-bold mb-3">Track of Thought</h6>
-//                     <NavLink
-//                       to="https://track-of-thought-web.vercel.app/"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="btn btn-success w-100"
-//                       onClick={() => submitScore("thoughtgame")}
-//                     >
-//                       Play Now
-//                     </NavLink>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               {/* Track of Thought Game */}
-//               <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-//                 <div className="card h-100 text-center border-0 shadow rounded-4">
-//                   <img
-//                     src="/pinv.jpg"
-//                     alt="Open Track of Thought Game"
-//                     className="card-img-top rounded-top"
-//                     style={{ height: "100px", objectFit: "cover" }}
-//                   />
-//                   <div className="card-body d-flex flex-column justify-content-between">
-//                     <h6 className="card-title fw-bold mb-3">Memory Matrix</h6>
-//                     <NavLink
-//                       to="https://mehdiahmadov.github.io/memory_matrix/"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="btn btn-success w-100"
-//                       onClick={() => submitScore("memorymatrix")}
-//                     >
-//                       Play Now
-//                     </NavLink>
-//                   </div>
-//                 </div>
-//               </div>
-
-
-//             </div>
-//           </div>
-//         )}
-
-//         {/* ✅ Render Games */}
-//         {movePages === 2 && <SymbolGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 3 && <QuickClickGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 4 && <UserProfile localName={ADMIN_NAME} localEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 5 && <BalloonGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 7 && <MissingNumberGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 8 && <TrackOfThoughtGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 9 && <ArrowGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 10 && <DigitsGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 11 && <InstructionsPage userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//         {movePages === 12 && <StarSearchGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} setmovePages={setmovePages} />}
-//       </Suspense>
-//     </div>
-//   );
-
-// }
-
-// // ✅ List of Games for Dynamic Rendering
-// const gamesList = [
-//   { image: "/symbol.jpg", title: "Symbol Speedster Game", pageId: 2 },
-//   { image: "/quick.png", title: "Quick Click Game", pageId: 3 },
-//   { image: "/balloon.png", title: "Balloon Game", pageId: 5 },
-//   { image: "/missingv.jpg", title: "Missing Number Game", pageId: 7 },
-//   { image: "/arrowv.jpg", title: "Arrow Game", pageId: 9 },
-//   { image: "/digitv.jpg", title: "Star Search Game", pageId: 12 },
-//   { image: "/trackp.jpg", title: "Track of Thought Game", pageId: 8 },
-//   { image: "/digitv.jpg", title: "Digits Game", pageId: 10 },
-// ];
-
-
-// // ✅ Reusable Game Card Component (Bootstrap Only)
-// const GameCard = ({ image, title, onClick }) => (
-//   <div
-//     className="card h-100 shadow-sm text-center border-0 rounded-4 bg-white game-card"
-//     onClick={onClick}
-//     role="button"
-//     style={{ transition: "transform 0.2s" }}
-//     onTouchStart={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
-//     onTouchEnd={(e) => (e.currentTarget.style.transform = "scale(1)")}
-//     onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-//     onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-//   >
-//     <img src={image} className="card-img-top rounded-top" alt={title} style={{ height: "100px", objectFit: "cover" }} />
-//     <div className="card-body p-3">
-//       <h6 className="card-title fw-bold">{title}</h6>
-//       <button className="btn btn-outline-primary w-100 mt-2">Play</button>
-//     </div>
-//   </div>
-// );
-
-
-// export default App;
-
 
 import React, { useEffect, lazy, Suspense } from "react";
 import axios from "axios";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./App.css";
+import { useAuth } from "./auth/AuthContext";
 
 // Lazy Load Pages
 const Home = lazy(() => import("./components/Home"));
@@ -231,29 +20,30 @@ const DigitsGame = lazy(() => import("./components/DigitsGame"));
 const StarSearchGame = lazy(() => import("./components/StarSearchGame"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
 const InstructionsPage = lazy(() => import("./components/InstructionsPage"));
-const GamesPage = lazy(() => import("./components/GamesPage")); // You'll create this
+const GamesPage = lazy(() => import("./components/GamesPage"));
 const Feedback = lazy(() => import("./components/Feedback"));
+const Login = lazy(() => import("./auth/Login"));
+const Register = lazy(() => import("./auth/Register"));
 
-
-// Default Credentials
-const ADMIN_NAME = "Admin";
-const ADMIN_EMAIL = "admin@gmail.com";
 const BASE_URL = "https://psyguage-backend.onrender.com";
 
-function App() {
-  const navigate = useNavigate();
+// ✅ Route guard component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
 
-  useEffect(() => {
-    localStorage.setItem("game_username", JSON.stringify(ADMIN_NAME));
-    localStorage.setItem("game_useremail", JSON.stringify(ADMIN_EMAIL));
-  }, []);
+function App() {
+  // ✅ Safely get from localStorage with fallback
+  const localName = JSON.parse(localStorage.getItem("game_username")) || "";
+  const localEmail = JSON.parse(localStorage.getItem("game_useremail")) || "";
 
   const submitScore = async (gameName) => {
     try {
       await axios.post(`${BASE_URL}/api/scores`, {
         gameName,
-        name: ADMIN_NAME,
-        email: ADMIN_EMAIL,
+        name: localName,
+        email: localEmail,
         score: Math.floor(Math.random() * 40),
       });
       console.log(`✅ Score submitted for ${gameName}`);
@@ -264,22 +54,26 @@ function App() {
 
   return (
     <div className="bg-light min-vh-100">
-      <Navbar localName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />
+      <Navbar localName={localName} userEmail={localEmail} />
       <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/games" element={<GamesPage submitScore={submitScore} />} />
-          <Route path="/profile" element={<UserProfile localName={ADMIN_NAME} localEmail={ADMIN_EMAIL} />} />
-          <Route path="/instructions" element={<InstructionsPage userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/symbol" element={<SymbolGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/quick" element={<QuickClickGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/balloon" element={<BalloonGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/missing" element={<MissingNumberGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/track" element={<TrackOfThoughtGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/arrow" element={<ArrowGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/digits" element={<DigitsGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/star" element={<StarSearchGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
-          <Route path="/feedback" element={<Feedback userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* ✅ Protected Routes */}
+          <Route path="/games" element={<ProtectedRoute><GamesPage submitScore={submitScore} /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><UserProfile localName={localName} localEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/instructions" element={<ProtectedRoute><InstructionsPage userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/symbol" element={<ProtectedRoute><SymbolGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/quick" element={<ProtectedRoute><QuickClickGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/balloon" element={<ProtectedRoute><BalloonGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/missing" element={<ProtectedRoute><MissingNumberGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/track" element={<ProtectedRoute><TrackOfThoughtGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/arrow" element={<ProtectedRoute><ArrowGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/digits" element={<ProtectedRoute><DigitsGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/star" element={<ProtectedRoute><StarSearchGame userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
+          <Route path="/feedback" element={<ProtectedRoute><Feedback userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
         </Routes>
       </Suspense>
     </div>

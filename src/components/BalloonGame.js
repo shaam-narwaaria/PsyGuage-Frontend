@@ -68,19 +68,7 @@ const BalloonGame = ({ userName, userEmail, setmovePages }) => {
         newRound();
     };
 
-    // const saveScore = async (score) => {
-    //     try {
-    //         await axios.post('http://localhost:5000/api/scores', {
-    //             gameName: 'BalloonGame',
-    //             name: userName,
-    //             email: userEmail,
-    //             score: score,
-    //         });
-    //         console.log('Score saved successfully');
-    //     } catch (error) {
-    //         console.error('Error saving score:', error);
-    //     }
-    // };
+
 
     const BASE_URL = "https://psyguage-backend.onrender.com"; // Use the deployed backend
 

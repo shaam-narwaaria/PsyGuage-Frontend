@@ -1,50 +1,79 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HouseFill, PersonFill, Joystick, BookFill } from "react-bootstrap-icons";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { setIsAuthenticated } = useAuth();
 
   useEffect(() => {
     document.body.style.paddingTop = "64px";   // Prevents content from being hidden by top navbar
     document.body.style.paddingBottom = "69px"; // Prevents content from being hidden by bottom navbar
   }, []);
 
+  const handleLogout = () => {
+    // Clear local storage and update auth state
+    localStorage.removeItem("game_username");
+    localStorage.removeItem("game_useremail");
+
+    fetch("https://psyguage-backend.onrender.com/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    setIsAuthenticated(false);
+    navigate("/login");
+  };
+
   const navItems = [
-    { icon: <HouseFill size={18} className="text-light" />, label: "Home", path: "/" },
-    { icon: <PersonFill size={18} className="text-light" />, label: "Profile", path: "/profile" },
-    { icon: <Joystick size={18} className="text-light" />, label: "Games", path: "/games" },
-    { icon: <BookFill size={18} className="text-light" />, label: "Instructions", path: "/instructions" },
+    { icon: <HouseFill size={18} />, label: "Home", path: "/" },
+    { icon: <PersonFill size={18} />, label: "Profile", path: "/profile" },
+    { icon: <Joystick size={18} />, label: "Games", path: "/games" },
+    { icon: <BookFill size={18} />, label: "Instructions", path: "/instructions" },
   ];
 
   return (
     <>
-
-      <nav
-        className="navbar navbar-dark fixed-top shadow-lg py-2 rounded-bottom"
+      {/* Top Navbar */}
+      <nav className="navbar navbar-dark fixed-top shadow-lg py-2 rounded-bottom"
         style={{
           background: "linear-gradient(135deg, #6a11cb, #2575fc)",
           height: "70px",
-          borderBottom: "3px solid rgba(255, 255, 255, 0.3)"
+          borderBottom: "3px solid rgba(255, 255, 255, 0.3)",
+          zIndex: 1000,
         }}
       >
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+        
 
+        <div className="container-fluid d-flex justify-content-between align-items-center flex-nowrap px-2">
           {/* Brand */}
-          <span className="navbar-brand fw-bold fs-3 text-light d-flex align-items-center mb-0">
-            <img src="logo2.png" alt="Logo" width="50" height="40" className="me-2" />
+          <span className="navbar-brand fw-bold fs-5 text-light d-flex align-items-center mb-0">
+            <img src="logo2.png" alt="Logo" width="40" height="30" className="me-2" />
             Psy<span className="text-warning">Gauge</span>
           </span>
 
-          {/* Feedback Button */}
-          <button
-            className="btn btn-outline-light btn-sm px-3 fw-semibold"
-            onClick={() => navigate("/feedback")}
-          >
-            Feedback
-          </button>
+          {/* Buttons - Responsive Layout */}
+          <div className="d-flex gap-1">
+            <button
+              className="btn btn-outline-light btn-sm fw-semibold px-2 py-1"
+              style={{ fontSize: "0.75rem" }}
+              onClick={() => navigate("/feedback")}
+            >
+              Feedback
+            </button>
+            <button
+              className="btn btn-outline-warning btn-sm fw-semibold px-2 py-1"
+              style={{ fontSize: "0.75rem" }}
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
         </div>
+
       </nav>
 
 
@@ -54,16 +83,24 @@ const Navbar = () => {
         style={{ backgroundColor: "#2575fc", height: "70px" }}
       >
         <div className="container d-flex justify-content-around">
-          {navItems.map((item, index) => (
-            <button
-              key={index}
-              className="btn d-flex flex-column align-items-center text-light fw-bold"
-              onClick={() => navigate(item.path)}
-            >
-              {item.icon}
-              <span className="small mt-1">{item.label}</span>
-            </button>
-          ))}
+          {navItems.map((item, index) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <button
+                key={index}
+                className={`btn d-flex flex-column align-items-center fw-bold ${isActive ? "text-warning" : "text-light"
+                  }`}
+                onClick={() => navigate(item.path)}
+                aria-label={item.label}
+                title={item.label}
+              >
+                {React.cloneElement(item.icon, {
+                  className: isActive ? "text-warning" : "text-light"
+                })}
+                <span className="small mt-1">{item.label}</span>
+              </button>
+            );
+          })}
         </div>
       </nav>
     </>
