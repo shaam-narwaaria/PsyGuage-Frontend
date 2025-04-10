@@ -232,6 +232,8 @@ const StarSearchGame = lazy(() => import("./components/StarSearchGame"));
 const UserProfile = lazy(() => import("./components/UserProfile"));
 const InstructionsPage = lazy(() => import("./components/InstructionsPage"));
 const GamesPage = lazy(() => import("./components/GamesPage")); // You'll create this
+const Feedback = lazy(() => import("./components/Feedback"));
+
 
 // Default Credentials
 const ADMIN_NAME = "Admin";
@@ -277,6 +279,7 @@ function App() {
           <Route path="/arrow" element={<ArrowGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
           <Route path="/digits" element={<DigitsGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
           <Route path="/star" element={<StarSearchGame userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
+          <Route path="/feedback" element={<Feedback userName={ADMIN_NAME} userEmail={ADMIN_EMAIL} />} />
         </Routes>
       </Suspense>
     </div>

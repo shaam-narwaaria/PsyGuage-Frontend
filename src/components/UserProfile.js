@@ -273,12 +273,12 @@ const UserProfile = ({ localName, localEmail, setmovePages }) => {
 
         return (
             <div className="col-md-4 col-sm-6 col-12 mb-3" key={gameName}>
-                <div className="game_card shadow rounded p-3 text-center bg-white h-100">
+                <div className="game_card shadow rounded text-center bg-white h-100">
                     <img
                         className="game_img rounded"
                         src={imageSrc}
                         alt={displayName}
-                        style={{ width: '100%', height: '150px', objectFit: 'cover' }}
+                        style={{ width: '100%', height: '220px', objectFit: 'cover' }}
                     />
                     <h5 className="mt-2 fw-bold">{displayName}</h5>
                     <p>Games Won: {gamesWon.length} / {totalGames.length}</p>
@@ -286,6 +286,8 @@ const UserProfile = ({ localName, localEmail, setmovePages }) => {
                     {avgResponseTime > 0 && <p>Avg. Response Time: {avgResponseTime.toFixed(2)} ms</p>}
                 </div>
             </div>
+
+            
         );
     };
 
@@ -349,7 +351,7 @@ const UserProfile = ({ localName, localEmail, setmovePages }) => {
                                     {renderGameSection("BalloonGame", "Balloon Game", "/balloonp.jpg")}
                                     {renderGameSection("MissingNumber", "Missing Number Game", "/missingp.jpg")}
                                     {renderGameSection("ArrowGame", "Arrow Game", "/arrowp.jpg")}
-                                    {renderGameSection("SearchStar", "Star Search Game", "/digitp.jpg")}
+                                    {renderGameSection("SearchStar", "Star Search Game", "images/starsearch.jpg")}
                                     {renderGameSection("pinballcounter", "Open Pinball Recall Game", "/pinp.jpg")}
                                     {renderGameSection("thoughtgame", "Track of Thought Game", "/trackp.jpg")}
                                     {renderGameSection("DigitGame", "Digit Game", "/digitp.jpg")}

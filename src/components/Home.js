@@ -91,7 +91,7 @@ function Home({ setmovePages }) {
 
 
             {/* Why Choose PsyGauge? */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#fdba74", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#fdba74", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -126,7 +126,7 @@ function Home({ setmovePages }) {
             </section>
 
             {/* How It Works */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -160,17 +160,17 @@ function Home({ setmovePages }) {
 
 
             {/* Explore Games Section */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#C8A2C8", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#C8A2C8", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
 
                 <div className="container">
                     <h2 className="text-start text-dark fw-bold mb-4">Explore Our Games</h2>
                     <div className="row g-4">
                         {[
-                            { img: "/trackp.jpg", title: "Multitasking Challenge", desc: "Test your ability to handle multiple tasks efficiently." },
-                            { img: "/missingp.jpg", title: "Problem Solver", desc: "Sharpen your logical thinking and problem-solving skills." },
+                            { img: "images/multitasking.jpg", title: "Multitasking Challenge", desc: "Test your ability to handle multiple tasks efficiently." },
+                            { img: "images/problemsolver.jpg", title: "Problem Solver", desc: "Sharpen your logical thinking and problem-solving skills." },
                             { img: "/clickp.jpg", title: "Reaction Timer", desc: "Measure your speed and accuracy in real-time." },
-                            { img: "/trackp.jpg", title: "Recall Power", desc: "Boost your memory recall and cognitive function." },
-                            { img: "/trackp.jpg", title: "Decision Maker", desc: "Enhance your decision-making under pressure." }
+                            { img: "images/recallpower.jpg", title: "Recall Power", desc: "Boost your memory recall and cognitive function." },
+                            { img: "images/decisionmaking.jpg", title: "Decision Maker", desc: "Enhance your decision-making under pressure." }
                         ].map((game, index) => (
                             <div key={index} className="col-12 col-sm-6 col-lg-4">
                                 <div className="card border-0 shadow-lg rounded-4 overflow-hidden"
@@ -179,18 +179,22 @@ function Home({ setmovePages }) {
                                     onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
                                 >
                                     {/* Image Wrapper */}
-                                    <div className="position-relative" style={{ height: "100px", overflow: "hidden", borderRadius: "10px" }}>
+                                    {/* <div className="position-relative" style={{ height: "180px", overflow: "hidden", borderRadius: "10px" }}>
                                         <img src={game.img} alt={game.title}
-                                            className="w-100 h-100 object-fit-cover"
+                                            className="w-100 h-100"
                                             style={{ height: "100%", objectFit: "cover", borderRadius: "10px" }}
                                         />
+                                    </div> */}
+
+                                    <div className="position-relative w-100" style={{ overflow: "hidden", borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "240px"}}>
+                                        <img src={game.img} alt={game.title} className="w-100 h-100" style={{ objectFit: "cover", width: "100%", height: "100%"}}/>
                                     </div>
 
 
                                     {/* Content */}
                                     <div className="card-body text-start p-4">
                                         <h5 className="card-title fw-bold text-primary">{game.title}</h5>
-                                        <p className="card-text text-secondary">{game.desc}</p>
+                                        {/* <p className="card-text text-secondary">{game.desc}</p> */}
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +205,7 @@ function Home({ setmovePages }) {
 
 
             {/* Testimonials Section */}
-            <section className="container-fluid py-5" style={{backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
 
                 <div className="container">
                     <h2 className="text-start text-dark fw-bold mb-5">What Our Users Say</h2>
@@ -232,7 +236,7 @@ function Home({ setmovePages }) {
 
 
             {/* FAQ Section */}
-            <section className="container-fluid py-5" style={{backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
 
                 <div className="container">
                     <h2 className="fw-bold mb-4 text-dark">Frequently Asked Questions</h2>
@@ -269,7 +273,7 @@ function Home({ setmovePages }) {
 
 
             {/* Newsletter Subscription */}
-            <section className="container-fluid py-5" style={{backgroundColor: "#ffffff", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#ffffff", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px" }}>
 
                 <div className="row justify-content-center">
                     <div className="col-md-8">
