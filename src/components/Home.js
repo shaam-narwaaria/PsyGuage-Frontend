@@ -19,26 +19,40 @@ function Home({ setmovePages }) {
         <div className="container-fluid p-0" style={{ paddingTop: "65px", paddingBottom: "75px" }}>
 
             {/* Hero Section */}
-            <header className="text-white d-flex align-items-center py-5"
-                style={{ background: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)", minHeight: "85vh" }}>
-
+            <header
+                className="text-dark d-flex align-items-center py-5"
+                style={{
+                    backgroundColor: "#ffffff",
+                    minHeight: "60vh",
+                }}
+            >
                 <div className="container">
                     <div className="row align-items-center">
                         {/* Left Content */}
                         <div className="col-12 col-md-7">
-                            <h1 className="fw-bold display-5 text-start">
-                                Welcome to <span className="text-warning">PsyGauge</span>
+                            <h1 className="fw-bold display-6 text-start">
+                                Welcome to <span className="text-primary">PsyGauge</span>
                             </h1>
 
-                            <p className="lead text-start">
-                                Revolutionizing candidate assessment through <span className="fw-bold">interactive psychometric games.</span> Test skills like <span className="text-warning">multitasking</span>, <span className="text-warning">problem-solving</span>, and <span className="text-warning">reaction time</span>.
+                            <p className="lead text-start text-secondary text-dark fw-semibold">
+                                Revolutionizing candidate assessment through{" "}
+                                <span className="fw-bold text-dark">interactive psychometric games.</span> Test skills like{" "}
+                                <span className="text-primary">multitasking</span>,{" "}
+                                <span className="text-primary">problem-solving</span>, and{" "}
+                                <span className="text-primary">reaction time</span>.
                             </p>
 
                             {/* Bullet Points with Blue Tick Icons */}
-                            <ul className="list-unstyled fw-bold text-start">
-                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Scientifically designed tests</li>
-                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Instant performance insights</li>
-                                <li><i className="bi bi-check-circle-fill text-primary fs-5 me-2"></i> Trusted by professionals & recruiters</li>
+                            <ul className="list-unstyled fw-semibold text-start text-dark">
+                                <li>
+                                    <i className="bi bi-check-circle-fill text-success fs-5 me-2"></i> Scientifically designed tests
+                                </li>
+                                <li>
+                                    <i className="bi bi-check-circle-fill text-success fs-5 me-2"></i> Instant performance insights
+                                </li>
+                                <li>
+                                    <i className="bi bi-check-circle-fill text-success fs-5 me-2"></i> Trusted by professionals & recruiters
+                                </li>
                             </ul>
 
                             {/* Centered Button */}
@@ -48,31 +62,36 @@ function Home({ setmovePages }) {
                                     style={{
                                         background: "linear-gradient(135deg, #ff8c00, #ff2e63)",
                                         color: "white",
-                                        border: "none"
+                                        border: "none",
                                     }}
                                     onClick={() => navigate("/games")}
                                 >
                                     Start Your Journey 🚀
                                 </button>
-
                             </div>
 
-                            <p className="mt-3 small text-center">No registration required. Try it now!</p>
+                            <p className="mt-3 small text-center text-muted">
+                                No registration required. Try it now!
+                            </p>
                         </div>
 
                         {/* Right-Side Image (Hidden on Mobile) */}
                         <div className="col-12 col-md-5 d-none d-md-flex justify-content-md-end">
-                            <img src="/symbol.png" alt="Hero Section"
+                            <img
+                                src="/symbol.png"
+                                alt="Hero Section"
                                 className="img-fluid rounded-3 shadow-lg"
-                                style={{ maxWidth: "85%", height: "auto" }} />
+                                style={{ maxWidth: "85%", height: "auto" }}
+                            />
                         </div>
                     </div>
                 </div>
             </header>
 
 
+
             {/* Why Choose PsyGauge? */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#fdba74" }}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#fdba74", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -107,7 +126,7 @@ function Home({ setmovePages }) {
             </section>
 
             {/* How It Works */}
-            <section className="container-fluid py-5" style={{ backgroundColor: "#818cf8" }}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -141,7 +160,8 @@ function Home({ setmovePages }) {
 
 
             {/* Explore Games Section */}
-            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg, #ffafbd, #ffc3a0)" }}>
+            <section className="container-fluid py-5" style={{ backgroundColor: "#C8A2C8", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", marginTop: "-20px"}}>
+
                 <div className="container">
                     <h2 className="text-start text-dark fw-bold mb-4">Explore Our Games</h2>
                     <div className="row g-4">
@@ -181,7 +201,8 @@ function Home({ setmovePages }) {
 
 
             {/* Testimonials Section */}
-            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg,rgb(163, 244, 255),rgb(251, 200, 200))" }}>
+            <section className="container-fluid py-5" style={{backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+
                 <div className="container">
                     <h2 className="text-start text-dark fw-bold mb-5">What Our Users Say</h2>
                     <div className="row g-4">
@@ -211,7 +232,7 @@ function Home({ setmovePages }) {
 
 
             {/* FAQ Section */}
-            <section className="container-fluid py-5" style={{ background: "linear-gradient(135deg,rgb(180, 237, 189),rgb(31, 248, 255))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+            <section className="container-fluid py-5" style={{backgroundColor: "#B3EBF2", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
 
                 <div className="container">
                     <h2 className="fw-bold mb-4 text-dark">Frequently Asked Questions</h2>
@@ -248,14 +269,15 @@ function Home({ setmovePages }) {
 
 
             {/* Newsletter Subscription */}
-            <section className="container-fluid py-5 rounded" style={{ background: "linear-gradient(135deg,rgb(139, 199, 251),rgb(248, 255, 31))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+            <section className="container-fluid py-5" style={{backgroundColor: "#ffffff", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem",  marginTop: "-20px"}}>
+
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <h2 className="fw-bold text-primary">📩 Stay Updated</h2>
                         <p className="text-muted fs-5">Subscribe to our newsletter for the latest insights and game updates.</p>
 
                         <form className="row g-2 justify-content-center">
-                            <div className="col-12 col-md-7">
+                            <div className="col-12 col-md-7 border border-dark rounded">
                                 <input
                                     type="email"
                                     className="form-control rounded p-3 shadow-sm"
@@ -279,31 +301,31 @@ function Home({ setmovePages }) {
 
 
             {/* Footer */}
-            <footer className="text-white text-center py-4"
-                style={{ background: "linear-gradient(135deg,rgb(64, 90, 114),rgb(40, 125, 27))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
-                <div className="container">
-                    <p className="mb-3" style={{ fontSize: "14px", opacity: "0.8" }}>
-                        &copy; {new Date().getFullYear()} PsyGauge. All rights reserved.
-                    </p>
-                    <div>
-                        <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
-                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
-                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
-                            <FaTwitter size={20} />
-                        </a>
-                        <a href="https://www.linkedin.com/in/shambhoolal-narwaria/" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
-                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
-                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
-                            <FaLinkedin size={20} />
-                        </a>
-                        <a href="mailto:snarwaria195mb@gmail.com" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
-                            onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
-                            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
-                            <FaEnvelope size={20} />
-                        </a>
+            {/* <footer className="text-white text-center py-4"
+                    style={{ background: "linear-gradient(135deg,rgb(64, 90, 114),rgb(40, 125, 27))", boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.2)" }}>
+                    <div className="container">
+                        <p className="mb-3" style={{ fontSize: "14px", opacity: "0.8" }}>
+                            &copy; {new Date().getFullYear()} PsyGauge. All rights reserved.
+                        </p>
+                        <div>
+                            <a href="#" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                                onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                                onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
+                                <FaTwitter size={20} />
+                            </a>
+                            <a href="https://www.linkedin.com/in/shambhoolal-narwaria/" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                                onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                                onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
+                                <FaLinkedin size={20} />
+                            </a>
+                            <a href="mailto:snarwaria195mb@gmail.com" className="text-white mx-2" style={{ transition: "opacity 0.3s" }}
+                                onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                                onMouseOut={(e) => e.currentTarget.style.opacity = "1"}>
+                                <FaEnvelope size={20} />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </footer>
+                </footer> */}
 
         </div>
     );
