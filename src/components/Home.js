@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -6,6 +7,7 @@ import { FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import "./Home.css";
 
 function Home({ setmovePages }) {
+    const navigate = useNavigate();
     const [openIndex, setOpenIndex] = useState(null);
 
     const toggleFAQ = (index) => {
@@ -48,7 +50,7 @@ function Home({ setmovePages }) {
                                         color: "white",
                                         border: "none"
                                     }}
-                                    onClick={() => setmovePages(1)}
+                                    onClick={() => navigate("/games")}
                                 >
                                     Start Your Journey 🚀
                                 </button>
