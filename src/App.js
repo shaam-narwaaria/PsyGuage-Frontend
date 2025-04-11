@@ -1,7 +1,6 @@
-
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import axios from "axios";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -35,7 +34,9 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   // ✅ Safely get from localStorage with fallback
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+
   const localName = user?.name || "";
   const localEmail = user?.email || "";
 
@@ -54,16 +55,23 @@ function App() {
     }
   };
 
+  if (loading) {
+    return <div className="text-center mt-5">Checking auth...</div>;
+  }
+
+
   return (
+
     <div className="bg-light min-vh-100">
       <Navbar localName={localName} userEmail={localEmail} />
       <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
+
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* ✅ Protected Routes */}
+          {/* Protected Routes */}
           <Route path="/games" element={<ProtectedRoute><GamesPage submitScore={submitScore} /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><UserProfile localName={localName} localEmail={localEmail} /></ProtectedRoute>} />
           <Route path="/instructions" element={<ProtectedRoute><InstructionsPage userName={localName} userEmail={localEmail} /></ProtectedRoute>} />
