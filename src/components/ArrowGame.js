@@ -1,24 +1,208 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './ArrowGame.css';
+// import React, { useState, useEffect, useRef, useCallback } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// import './ArrowGame.css';
 
-const ArrowGame = ({ userName, userEmail, setmovePages }) => {
+// const ArrowGame = ({ userName, userEmail }) => {
+//     const [round, setRound] = useState(0);
+//     const [sequence, setSequence] = useState([]);
+//     const [score, setScore] = useState(0);
+//     const [gameOver, setGameOver] = useState(false);
+//     const [gameStarted, setGameStarted] = useState(false);
+//     const [scoreSaved, setScoreSaved] = useState(false);
+//     const totalRounds = 15;
+//     const navigate = useNavigate();
+
+//     const inactivityTimer = useRef(null);
+
+//     const startGame = () => {
+//         setGameStarted(true);
+//         setRound(0);
+//         setScore(0);
+//         setGameOver(false);
+//         setScoreSaved(false);
+//         generateSequence();
+//     };
+
+//     const restartGame = () => {
+//         setGameStarted(true);
+//         setRound(0);
+//         setScore(0);
+//         setGameOver(false);
+//         setScoreSaved(false);
+//         generateSequence();
+//     };
+
+//     const generateSequence = () => {
+//         const arrows = ['←', '→'];
+//         const colors = ['red', 'blue'];
+//         const color = colors[Math.floor(Math.random() * colors.length)];
+//         const direction = arrows[Math.floor(Math.random() * arrows.length)];
+
+//         const seq = [];
+//         for (let i = 0; i < 5; i++) {
+//             const arrow = i === 2 ? (direction === '←' ? '→' : '←') : direction;
+//             seq.push({ arrow, color });
+//         }
+
+//         setSequence(seq);
+//     };
+
+//     const handleKeyPress = useCallback((event) => {
+//         if (!gameStarted || gameOver) return;
+
+//         const key = event.key;
+//         const correctArrow = sequence[round % 5];
+
+//         if (key === 'ArrowLeft' || key === 'ArrowRight') {
+//             let direction = key === 'ArrowLeft' ? '←' : '→';
+
+//             if (correctArrow.color === 'blue') {
+//                 direction = direction === '←' ? '→' : '←';
+//             }
+
+//             if (correctArrow.arrow === direction) {
+//                 setScore((prev) => prev + 10);
+//             } else {
+//                 setScore((prev) => prev - 5);
+//             }
+
+//             setRound((prev) => prev + 1);
+
+//             clearTimeout(inactivityTimer.current);
+//         }
+//     }, [gameStarted, gameOver, sequence, round]);
+
+//     const simulateKeyPress = (key) => {
+//         const event = new KeyboardEvent('keydown', { key });
+//         window.dispatchEvent(event);
+//     };
+
+//     const saveScore = async (finalScore) => {
+//         try {
+//             if (!userEmail) {
+//                 console.error("Error: Email is missing!");
+//                 return;
+//             }
+
+//             const response = await axios.post('https://psyguage-backend.onrender.com/api/scores', {
+//                 gameName: 'ArrowGame',
+//                 name: userName,
+//                 email: userEmail,
+//                 score: finalScore,
+//             });
+
+//             console.log('Score saved successfully:', response.data);
+//         } catch (error) {
+//             console.error('Error saving score:', error.response?.data || error.message);
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (gameStarted && round < totalRounds) {
+//             generateSequence();
+//         } else if (round >= totalRounds && !scoreSaved) {
+//             setGameOver(true);
+//             saveScore(score);
+//             setScoreSaved(true);
+//         }
+
+//         clearTimeout(inactivityTimer.current);
+
+//         inactivityTimer.current = setTimeout(() => {
+//             if (!gameOver && gameStarted) {
+//                 setRound((prev) => prev + 1);
+//             }
+//         }, 1500);
+
+//         return () => clearTimeout(inactivityTimer.current);
+//     }, [round, gameStarted, gameOver, scoreSaved]);
+
+//     useEffect(() => {
+//         window.addEventListener('keydown', handleKeyPress);
+//         return () => {
+//             window.removeEventListener('keydown', handleKeyPress);
+//         };
+//     }, [handleKeyPress]);
+
+//     return (
+//         <div className="arrow-game">
+//             <h1 className="arrow-game-title">Arrow Game</h1>
+//             {!gameStarted ? (
+//                 <button onClick={startGame} className="arrow-game-start-button">Start Game</button>
+//             ) : (
+//                 <>
+//                     <h2 className="arrow-game-round">Round {round + 1} / {totalRounds}</h2>
+//                     <p className="arrow-game-score">Score: {score}</p>
+//                     {gameOver ? (
+//                         <div className="arrow-game-modal-overlay">
+//                             <div className="arrow-game-modal-content">
+//                                 <p className="arrow-game-game-over-message">Game over! Your final score is {score}.</p>
+//                                 <button onClick={restartGame} className="arrow-game-restart-button">Restart</button>
+//                                 <button onClick={() => navigate('/games')} className="arrow-game-menu-button">Go to Menu</button>
+//                             </div>
+//                         </div>
+//                     ) : (
+//                         <>
+//                             <div className="arrow-game-sequence">
+//                                 <div className="arrow-game-arrows">
+//                                     {sequence.map((item, index) => (
+//                                         <span
+//                                             key={index}
+//                                             style={{ color: item.color }}
+//                                             className="arrow-game-arrow"
+//                                         >
+//                                             {item.arrow}
+//                                         </span>
+//                                     ))}
+//                                 </div>
+//                                 <p className="arrow-game-instructions">Press the correct arrow key (← or →) based on the arrow sequence and color.</p>
+//                             </div>
+
+//                             {/* On-screen arrow buttons for mobile */}
+//                             <div className="d-md-none mt-4 text-center">
+//                                 <p>Use these if you're on mobile:</p>
+//                                 <div className="d-flex justify-content-center gap-4">
+//                                     <button className="btn btn-primary arrow-mobile-btn" onClick={() => simulateKeyPress('ArrowLeft')}>←</button>
+//                                     <button className="btn btn-primary arrow-mobile-btn" onClick={() => simulateKeyPress('ArrowRight')}>→</button>
+//                                 </div>
+//                             </div>
+//                         </>
+//                     )}
+//                 </>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default ArrowGame;
+
+
+
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './ArrowGame.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const ArrowGame = ({ userName, userEmail }) => {
     const [round, setRound] = useState(0);
     const [sequence, setSequence] = useState([]);
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
-    const [scoreSaved, setScoreSaved] = useState(false); // To track if the score has already been saved
+    const [scoreSaved, setScoreSaved] = useState(false);
     const totalRounds = 15;
-
-    let inactivityTimer; // Variable to hold the inactivity timer
+    const navigate = useNavigate();
+    const inactivityTimer = useRef(null);
 
     const startGame = () => {
         setGameStarted(true);
         setRound(0);
         setScore(0);
         setGameOver(false);
-        setScoreSaved(false); // Reset scoreSaved when a new game starts
+        setScoreSaved(false);
         generateSequence();
     };
 
@@ -27,33 +211,9 @@ const ArrowGame = ({ userName, userEmail, setmovePages }) => {
         setRound(0);
         setScore(0);
         setGameOver(false);
-        setScoreSaved(false); // Reset scoreSaved when the game restarts
+        setScoreSaved(false);
         generateSequence();
     };
-
-    useEffect(() => {
-        if (gameStarted && round < totalRounds) {
-            generateSequence();
-        } else if (round >= totalRounds && !scoreSaved) { // Only save score once
-            setGameOver(true);
-            saveScore(score);
-            setScoreSaved(true); // Mark score as saved
-        }
-
-        // Clear inactivity timer when round or sequence changes
-        clearTimeout(inactivityTimer);
-
-        // Set the inactivity timer to automatically move to next round after 1.5 seconds
-        inactivityTimer = setTimeout(() => {
-            if (!gameOver && gameStarted) {
-                setRound((prevRound) => prevRound + 1);
-            }
-        }, 1500); // 1.5 seconds of inactivity
-
-        return () => {
-            clearTimeout(inactivityTimer); // Cleanup on unmount or state change
-        };
-    }, [round, gameStarted, gameOver, scoreSaved]);
 
     const generateSequence = () => {
         const arrows = ['←', '→'];
@@ -70,112 +230,124 @@ const ArrowGame = ({ userName, userEmail, setmovePages }) => {
         setSequence(seq);
     };
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = useCallback((event) => {
         if (!gameStarted || gameOver) return;
 
         const key = event.key;
-        const correctArrow = sequence[round % 5]; // Gets the current correct arrow and color
+        const correctArrow = sequence[round % 5];
 
         if (key === 'ArrowLeft' || key === 'ArrowRight') {
             let direction = key === 'ArrowLeft' ? '←' : '→';
-
-            // Reverse direction if the arrow color is blue
             if (correctArrow.color === 'blue') {
                 direction = direction === '←' ? '→' : '←';
             }
 
-            // If the pressed key matches the arrow direction, add score
             if (correctArrow.arrow === direction) {
-                setScore((prevScore) => prevScore + 10);
+                setScore((prev) => prev + 10);
             } else {
-                // If the pressed key is incorrect, subtract score (with an additional penalty if arrow color is blue)
-                setScore((prevScore) => prevScore - 5);
+                setScore((prev) => prev - 5);
             }
 
-            // Move to the next round
-            setRound((prevRound) => prevRound + 1);
-
-            // Reset the inactivity timer since the player has responded
-            clearTimeout(inactivityTimer);
+            setRound((prev) => prev + 1);
+            clearTimeout(inactivityTimer.current);
         }
-    };
+    }, [gameStarted, gameOver, sequence, round]);
 
-    // const saveScore = async (finalScore) => {
-    //     try {
-    //         const response = await axios.post('http://localhost:5000/api/scores', {
-    //             gameName: 'ArrowGame',
-    //             name: userName,
-    //             email: userEmail,
-    //             score: finalScore,
-    //         });
-    //         console.log('Score saved successfully:', response.data);
-    //     } catch (error) {
-    //         console.error('Error saving score:', error);
-    //     }
-    // };
+    const simulateKeyPress = (key) => {
+        const event = new KeyboardEvent('keydown', { key });
+        window.dispatchEvent(event);
+    };
 
     const saveScore = async (finalScore) => {
         try {
-            console.log("Saving score for:", { userName, userEmail, finalScore });  // ✅ Debugging
-    
-            if (!userEmail) {
-                console.error("Error: Email is missing!");
-                return;
-            }
-    
-            const response = await axios.post('https://psyguage-backend.onrender.com/api/scores', {
+            if (!userEmail) return;
+
+            await axios.post('https://psyguage-backend.onrender.com/api/scores', {
                 gameName: 'ArrowGame',
                 name: userName,
                 email: userEmail,
                 score: finalScore,
             });
-    
-            console.log('Score saved successfully:', response.data);
         } catch (error) {
             console.error('Error saving score:', error.response?.data || error.message);
         }
     };
-    
+
+    useEffect(() => {
+        if (gameStarted && round < totalRounds) {
+            generateSequence();
+        } else if (round >= totalRounds && !scoreSaved) {
+            setGameOver(true);
+            saveScore(score);
+            setScoreSaved(true);
+        }
+
+        clearTimeout(inactivityTimer.current);
+        inactivityTimer.current = setTimeout(() => {
+            if (!gameOver && gameStarted) {
+                setRound((prev) => prev + 1);
+            }
+        }, 1500);
+
+        return () => clearTimeout(inactivityTimer.current);
+    }, [round, gameStarted, gameOver, scoreSaved]);
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
         };
-    }, [sequence, round, gameStarted, gameOver]);
+    }, [handleKeyPress]);
 
     return (
-        <div className="arrow-game">
-            <h1 className="arrow-game-title">Arrow Game</h1>
+        <div className="arrow-game container d-flex flex-column justify-content-center align-items-center text-center py-4">
+            <h1 className="arrow-game-title mb-4">Arrow Game</h1>
             {!gameStarted ? (
-                <button onClick={startGame} className="arrow-game-start-button">Start Game</button>
+                <button onClick={startGame} className="btn btn-success btn-lg mb-3">
+                    Start Game
+                </button>
             ) : (
                 <>
-                    <h2 className="arrow-game-round">Round {round + 1} / {totalRounds}</h2>
-                    <p className="arrow-game-score">Score: {score}</p>
+                    <h2 className="arrow-game-round mb-2">Round {round + 1} / {totalRounds}</h2>
+                    <p className="arrow-game-score fs-5 mb-4">Score: {score}</p>
                     {gameOver ? (
-                        <div className="arrow-game-modal-overlay">
-                            <div className="arrow-game-modal-content">
-                                <p className="arrow-game-game-over-message">Game over! Your final score is {score}.</p>
-                                <button onClick={restartGame} className="arrow-game-restart-button">Restart</button>
-                                <button onClick={() => setmovePages(1)} className="arrow-game-menu-button">Go to Menu</button>
+                        <div className="arrow-game-modal-overlay d-flex justify-content-center align-items-center">
+                            <div className="arrow-game-modal-content bg-light rounded shadow p-4 text-center">
+                                <p className="fs-4">Game over! Your final score is <strong>{score}</strong>.</p>
+                                <div className="d-grid gap-2 mt-3">
+                                    <button onClick={restartGame} className="btn btn-warning">Restart</button>
+                                    <button onClick={() => navigate('/games')} className="btn btn-secondary">Go to Menu</button>
+                                </div>
                             </div>
                         </div>
                     ) : (
-                        <div className="arrow-game-sequence">
-                            <div className="arrow-game-arrows">
-                                {sequence.map((item, index) => (
-                                    <span
-                                        key={index}
-                                        style={{ color: item.color }}
-                                        className="arrow-game-arrow"
-                                    >
-                                        {item.arrow}
-                                    </span>
-                                ))}
+                        <>
+                            <div className="arrow-game-sequence mb-3">
+                                <div className="arrow-game-arrows fs-1">
+                                    {sequence.map((item, index) => (
+                                        <span
+                                            key={index}
+                                            style={{ color: item.color }}
+                                            className="arrow-game-arrow mx-1"
+                                        >
+                                            {item.arrow}
+                                        </span>
+                                    ))}
+                                </div>
+                                <p className="arrow-game-instructions mt-2 text-muted">
+                                    Press ← or → based on the middle arrow and color rule (blue = reverse).
+                                </p>
                             </div>
-                            <p className="arrow-game-instructions">Press the correct arrow key (← or →) based on the arrow sequence and color.</p>
-                        </div>
+
+                            {/* On-screen arrow buttons for mobile */}
+                            <div className="d-md-none mt-4 text-center">
+                                <p>Use buttons below if on mobile:</p>
+                                <div className="d-flex justify-content-center gap-4">
+                                    <button className="btn btn-primary arrow-mobile-btn px-4 py-2" onClick={() => simulateKeyPress('ArrowLeft')}>←</button>
+                                    <button className="btn btn-primary arrow-mobile-btn px-4 py-2" onClick={() => simulateKeyPress('ArrowRight')}>→</button>
+                                </div>
+                            </div>
+                        </>
                     )}
                 </>
             )}
@@ -184,3 +356,5 @@ const ArrowGame = ({ userName, userEmail, setmovePages }) => {
 };
 
 export default ArrowGame;
+
+
