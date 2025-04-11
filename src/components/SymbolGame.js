@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './SymbolGame.css';
 
-const symbols = ["⭐", "🌙", "🔥", "💧", "🍀", "💎"]; // Sample symbols
+const symbols = ["⭐", "🌙", "🔥", "💧", "🍀", "💎"];
 
-const SymbolGame = (props) => {
-  const { userName, userEmail, setmovePages } = props;
-
+const SymbolGame = ({ userName, userEmail }) => {
   const [symbolGrid, setSymbolGrid] = useState([]);
   const [targetSymbol, setTargetSymbol] = useState("");
   const [count, setCount] = useState(0);
@@ -16,11 +15,12 @@ const SymbolGame = (props) => {
   const [score, setScore] = useState(null);
   const [round, setRound] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
-  const [roundScores, setRoundScores] = useState([]);
 
   const rows = 3;
   const columns = 7;
   const totalSymbols = rows * columns;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     startNewGame();
@@ -52,79 +52,60 @@ const SymbolGame = (props) => {
       if (responseTime <= 16) return 30;
       return 20;
     }
-    return 0; // No points if incorrect
+    return 0;
   };
 
   const handleSubmit = async () => {
-    const responseTime = (Date.now() - startTime) / 1000; // in seconds
+    const responseTime = (Date.now() - startTime) / 1000;
     const correctCount = parseInt(userCount) === count;
     const calculatedScore = calculateScore(responseTime, correctCount);
 
     setScore(calculatedScore);
-    setRoundScores(prevScores => [...prevScores, calculatedScore]);
-
     setTotalScore(prevTotal => prevTotal + calculatedScore);
 
     if (round < 5) {
       setRound(round + 1);
     } else {
       setGameOver(true);
-      await saveScores();
+      await saveScores(responseTime);
     }
   };
 
-  // const saveScores = async () => {
-  //   const responseTime = (Date.now() - startTime) / 1000; // Calculate the response time in seconds
-  //   try {
-  //     await axios.post('http://localhost:5000/api/scores', {
-  //       gameName: "SymbolCounter",
-  //       name: userName,
-  //       email: userEmail,
-  //       score: totalScore,
-  //       responseSymbolTime: responseTime,
-  //     });
-  //     console.log('Score saved successfully');
-  //   } catch (error) {
-  //     console.error('Error saving score:', error);
-  //   }
-  // };
-
-  const saveScores = async () => {
-    const responseTime = (Date.now() - startTime) / 1000; // Calculate response time in seconds
+  const saveScores = async (responseTime) => {
     try {
-        await axios.post("https://psyguage-backend.onrender.com/api/scores", {
-            gameName: "SymbolCounter",
-            name: userName,
-            email: userEmail,
-            score: totalScore,
-            responseSymbolTime: responseTime,
-        });
-        console.log("Score saved successfully");
+      await axios.post("https://psyguage-backend.onrender.com/api/scores", {
+        gameName: "SymbolCounter",
+        name: userName,
+        email: userEmail,
+        score: totalScore,
+        responseSymbolTime: responseTime,
+      });
+      console.log("Score saved successfully");
     } catch (error) {
-        console.error("Error saving score:", error);
+      console.error("Error saving score:", error);
     }
-};
-
+  };
 
   return (
     <div className="container-symbol">
       <div className="symbol-game">
         <h2 className="h2-symbolheading">Symbol Counting Game</h2>
-        {/* <div className="game-rounds-symbol">
-          <p>Round {round} of 5</p>
-        </div> */}
+
         {gameOver ? (
           <div className="results result-symbolcount">
             <h3>Your Total Score: {totalScore}</h3>
             <p>You've completed 5 rounds!</p>
             <div>
-              <button onClick={() => setmovePages(2)} className="btn btn-secondary-symbol">Play Again</button>
-              <button onClick={() => setmovePages(1)} className="btn btn-primary-symbol">Go to Menu</button>
+              <button onClick={() => navigate("/symbol")} className="btn btn-secondary-symbol">Play Again</button>
+              <button onClick={() => navigate("/games")} className="btn btn-primary-symbol">Go to Menu</button>
             </div>
           </div>
         ) : (
-          <div>
-            <p className="count-paragraph-symbol">Count the number of "{targetSymbol}" symbols</p>
+          <>
+            <p className="count-paragraph-symbol">
+              Count the number of <strong>{targetSymbol}</strong> symbols
+            </p>
+
             <div className="symbol-grid-symbol">
               {symbolGrid.map((symbol, index) => (
                 <span key={index} className="symbol-symbol">{symbol}</span>
@@ -141,7 +122,7 @@ const SymbolGame = (props) => {
               />
               <button onClick={handleSubmit} className="btn-submit-symbol">Submit</button>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>

@@ -1,182 +1,169 @@
-/* General Styles */
-.container-star {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    padding: 5px;
-    margin-top: 50px;
-}
-
-.star-search-game {
-    background-color: #fff;
-    padding: 3px;
-    /* Reduced padding for a tighter layout */
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    /* Reduced max-width */
-}
-
-/* Enhanced Font Style */
-.game-instruction-star {
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    /* Slightly smaller text */
-    color: #444;
-    margin-bottom: 25px;
-    /* Reduced margin */
-    font-weight: 500;
-}
-
-/* Improved Symbol Grid */
-.symbol-grid-star {
-    display: grid;
-    grid-template-columns: repeat(4, 70px);
-    /* Reduced size of columns */
-    grid-template-rows: repeat(4, 70px);
-    /* Reduced size of rows */
-    gap: 60px;
-    /* Smaller gap between symbols */
-    margin-bottom: 30px;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #fafafa;
-    border-radius: 12px;
-}
-
-/* Symbol Styling */
-.symbol-star {
-    width: 70px;
-    /* Smaller symbol size */
-    height: 70px;
-    /* Smaller symbol size */
-    background-color: #ddd;
-    cursor: pointer;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
-    padding: 5px;
-    /* Reduced padding */
-    box-sizing: border-box;
-}
-
-.symbol-star:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    background-color: #ffcc00;
-}
-
-/* Symbol Shapes */
-.symbol-star.circle {
+/* .symbol-box {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 10%;
+    border: 2px solid #ccc;
+    display: inline-block;
+  }
+  
+  .circle {
     border-radius: 50%;
-    background-color: #ff5733;
-}
-
-.symbol-star.square {
-    background-color: #3498db;
-    border-radius: 10px;
-}
-
-.symbol-star.triangle {
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    background-color: #2ecc71;
-}
-
-.symbol-star.diamond {
+  }
+  
+  .square {
+    border-radius: 0;
+  }
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 45px solid green;
+    background: none;
+  }
+  
+  .diamond {
     transform: rotate(45deg);
-    background-color: #e67e22;
-}
+  }
+  
+  .hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+  
+  .red { background-color: red; }
+  .blue { background-color: blue; }
+  .green { background-color: green; }
+  .orange { background-color: orange; }
+  .yellow { background-color: yellow; }
+  .purple { background-color: purple; }
+  
+  .solid { border-style: solid; }
+  .dotted { border-style: dotted; }
+  .striped {
+    background-image: repeating-linear-gradient(
+      45deg,
+      currentColor,
+      currentColor 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
+  
+  @media (max-width: 768px) {
+    .symbol-box {
+      width: 40px;
+      height: 40px;
+    }
+  }
+   */
 
-.symbol-star.hexagon {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    background-color: #9b59b6;
-}
 
-/* Game Over Screen */
-.game-over-star {
-    text-align: center;
-    padding: 30px;
-    background-color: #f8f9fa;
+/* Container Styling */
+.star-game-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #f0f4ff, #e0eaff);
+    padding: 20px;
     border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.game-over-star h3 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: 600;
+/* Grid Layout */
+.symbol-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
 }
 
-/* Button Styles */
-.btn-star {
-    padding: 10px 20px;
-    /* Reduced button padding */
-    font-size: 16px;
-    /* Smaller font size */
-    border-radius: 8px;
+/* General Box Styling */
+.symbol-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.symbol-box:hover {
+    transform: scale(1.1);
     cursor: pointer;
-    margin: 12px;
-    transition: background-color 0.3s ease;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
+/* Shape Styles */
+.circle {
+    border-radius: 50%;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.square {
+    border-radius: 8px;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border: none;
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid;
+    background: none !important;
 }
 
-.btn-secondary:hover {
-    background-color: #5a6268;
+.diamond {
+    width: 40px;
+    height: 40px;
+    transform: rotate(45deg);
 }
 
-/* Game Status */
-.game-status-star {
-    font-size: 18px;
-    color: #333;
-    margin-top: 25px;
+.hexagon {
+    clip-path: polygon(25% 0%,
+            75% 0%,
+            100% 50%,
+            75% 100%,
+            25% 100%,
+            0% 50%);
 }
 
-/* Responsive Layout */
-@media (max-width: 768px) {
-    .symbol-grid-star {
-        grid-template-columns: repeat(3, 60px);
-        /* Adjust for smaller screens */
-        grid-template-rows: repeat(3, 60px);
-        /* Adjust symbol size */
-    }
-
-    .symbol-star {
-        width: 60px;
-        height: 60px;
-    }
+/* Color Styles */
+.red {
+    background-color: #ff4d4d;
 }
 
-@media (max-width: 480px) {
-    .symbol-grid-star {
-        grid-template-columns: repeat(2, 50px);
-        /* Even smaller symbols */
-        grid-template-rows: repeat(2, 50px);
-        /* Adjust for mobile devices */
-    }
+.blue {
+    background-color: #4d79ff;
+}
 
-    .symbol-star {
-        width: 50px;
-        height: 50px;
-    }
+.green {
+    background-color: #28a745;
+}
+
+.orange {
+    background-color: #ff9933;
+}
+
+.yellow {
+    background-color: #fcd303;
+}
+
+.purple {
+    background-color: #a64dff;
+}
+
+/* Pattern Overlays */
+.dotted {
+    background-image: radial-gradient(white 1.5px, transparent 1.5px);
+    background-size: 8px 8px;
+}
+
+.striped {
+    background-image: repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.6) 4px,
+            transparent 4px,
+            transparent 8px);
 }
