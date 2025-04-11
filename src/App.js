@@ -35,8 +35,10 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   // ✅ Safely get from localStorage with fallback
-  const localName = JSON.parse(localStorage.getItem("game_username")) || "";
-  const localEmail = JSON.parse(localStorage.getItem("game_useremail")) || "";
+  const { user } = useAuth();
+  const localName = user?.name || "";
+  const localEmail = user?.email || "";
+
 
   const submitScore = async (gameName) => {
     try {

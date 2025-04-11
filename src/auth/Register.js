@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useAuth } from "./AuthContext";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [form, setForm] = useState({ name: "", email: "", password: "" });
     const [message, setMessage] = useState("");
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -20,18 +22,23 @@ function Register() {
         setLoading(true);
 
         try {
-            const res = await axios.post(
+            await axios.post(
                 "https://psyguage-backend.onrender.com/api/auth/register",
                 form,
                 { withCredentials: true }
             );
 
-            localStorage.setItem("game_username", JSON.stringify(form.name));
-            localStorage.setItem("game_useremail", JSON.stringify(form.email));
-
-            setMessage(res.data.message);
-            setLoading(false);
-            navigate("/");
+            // Now login the user using AuthContext
+            const res = await login(form.email, form.password);
+            if (res.success) {
+                setMessage("Registration successful!");
+                setLoading(false);
+                navigate("/games"); // ✅ Redirect to protected route
+            } else {
+                setMessage("Registered but failed to log in.");
+                setError(true);
+                setLoading(false);
+            }
         } catch (err) {
             setMessage(err.response?.data?.message || "Registration failed");
             setError(true);
@@ -97,7 +104,7 @@ function Register() {
                     </form>
 
                     <div className="text-center mt-3 small text-muted">
-                        Already have an account? <a href="/login">Login</a>
+                        Already have an account? <Link to="/login">Login</Link>
                     </div>
                 </div>
             </div>

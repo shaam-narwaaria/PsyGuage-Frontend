@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useAuth } from "./AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
-    const { setIsAuthenticated } = useAuth();
+    const { login } = useAuth(); // ✅ use login from context
     const [form, setForm] = useState({ email: "", password: "", rememberMe: false });
     const [message, setMessage] = useState("");
     const [error, setError] = useState(false);
@@ -24,23 +23,16 @@ function Login() {
         setError(false);
         setLoading(true);
 
-        try {
-            const res = await axios.post(
-                "https://psyguage-backend.onrender.com/api/auth/login",
-                form,
-                { withCredentials: true }
-            );
+        const { email, password } = form;
 
-            const { name, email } = res.data.user || {};
-            localStorage.setItem("game_username", JSON.stringify(name));
-            localStorage.setItem("game_useremail", JSON.stringify(email));
+        const res = await login(email, password); // ✅ use context login
 
-            setIsAuthenticated(true);
-            setMessage(res.data.message);
+        if (res.success) {
+            setMessage("Login successful!");
             setLoading(false);
-            navigate("/");
-        } catch (err) {
-            setMessage(err.response?.data?.message || "Login failed");
+            navigate("/games"); // ✅ redirect to protected page
+        } else {
+            setMessage(res.message);
             setError(true);
             setLoading(false);
         }
@@ -119,7 +111,7 @@ function Login() {
                     </form>
 
                     <div className="text-center mt-3 small text-muted">
-                        Don’t have an account? <a href="/register">Register</a>
+                        Don’t have an account? <Link to="/register">Register</Link>
                     </div>
                 </div>
             </div>
