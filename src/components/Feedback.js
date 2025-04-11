@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { CheckCircleFill } from 'react-bootstrap-icons';
 
 const Feedback = () => {
@@ -9,30 +9,58 @@ const Feedback = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Feedback submitted:", formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 5000); // hide message after 5s
+    setError(null);
+
+    try {
+      const res = await fetch("https://psyguage-backend.onrender.com/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        console.log("✅ Feedback submitted");
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        const data = await res.json();
+        setError(data.message || "Failed to submit feedback");
+      }
+    } catch (err) {
+      console.error("❌ Error submitting feedback:", err);
+      setError("Network error. Please try again later.");
+    }
   };
 
   return (
     <Container className="py-5 d-flex justify-content-center align-items-center">
       <div className="p-5 shadow-lg rounded-4 bg-light w-100" style={{ maxWidth: "600px" }}>
         <h2 className="mb-4 text-center text-primary fw-bold">
-        We Value Your Feedback </h2>
+          We Value Your Feedback
+        </h2>
 
         {submitted && (
           <Alert variant="success" className="d-flex align-items-center gap-2 fade show">
             <CheckCircleFill className="text-success" size={20} />
             <span>Thank you for your feedback!</span>
+          </Alert>
+        )}
+
+        {error && (
+          <Alert variant="danger">
+            {error}
           </Alert>
         )}
 
