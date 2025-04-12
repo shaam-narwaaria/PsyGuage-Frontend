@@ -153,7 +153,7 @@ const Navbar = () => {
           {/* Brand */}
           <span className="navbar-brand fw-bold fs-5 text-light d-flex align-items-center mb-0">
             <img src="/logo2.png" alt="Logo" width="40" height="30" className="me-2" />
-            Psy<span className="text-warning">Gauge</span>
+            PsyGauge
           </span>
 
           {/* Right Section: User Info & Buttons */}
