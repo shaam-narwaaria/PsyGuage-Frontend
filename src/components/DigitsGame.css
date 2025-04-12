@@ -1,122 +1,104 @@
-/* Container layout */
-.digits-game-container {
-    max-width: 500px;
-    margin: auto;
+/* Ensure outer container fits screen without overflow */
+.container-symbol {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Responsive game box */
+.symbol-game {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* Symbol grid layout */
+.symbol-grid-symbol {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+  justify-items: center;
+  word-break: break-word;
+}
+
+/* Symbol size */
+.symbol-symbol {
+  font-size: 2rem;
+}
+
+/* Input and submit section */
+.input-container-symbol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mobile-friendly input */
+.form-control-symbol {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Buttons */
+.btn-submit-symbol,
+.btn-primary-symbol,
+.btn-secondary-symbol {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-submit-symbol {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-primary-symbol {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-secondary-symbol {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Game results */
+.results {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .symbol-grid-symbol {
+    grid-template-columns: repeat(4, 1fr); /* fewer columns on small screen */
+    gap: 10px;
+  }
+
+  .symbol-symbol {
+    font-size: 1.8rem;
+  }
+
+  .symbol-game {
     padding: 1rem;
   }
-  
-  /* Start Screen */
-  .start-screen {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out;
+
+  .form-control-symbol {
+    width: 80%;
   }
-  
-  /* Digit display */
-  .digit-sequence {
-    margin: 1rem 0;
-  }
-  
-  .digit-sequence .digit {
-    display: inline-block;
-    margin: 0 6px;
-    padding: 12px 16px;
-    font-size: 2rem;
-    font-weight: bold;
-    background-color: #e9ecef;
-    border-radius: 10px;
-    color: #212529;
-  }
-  
-  /* Input section */
-  .input-section {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  .input-section input {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  
-  .input-section .btn {
-    width: 100%;
-  }
-  
-  /* Feedback text */
-  .feedback {
-    margin-top: 1rem;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  /* Game Over Section */
-  .game-over-screen {
-    background-color: #fff0f0;
-    padding: 2rem;
-    border-radius: 12px;
-    animation: fadeIn 0.5s ease-in-out;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
-  }
-  
-  .game-over-screen p {
-    margin: 0.3rem 0;
-    font-size: 1rem;
-  }
-  
-  .game-over-screen .btn {
-    min-width: 140px;
-  }
-  
-  /* Digit summary */
-  .digits-summary-container {
-    margin: 1rem 0;
-  }
-  
-  .highlight {
-    font-weight: bold;
-    color: #d63384;
-  }
-  
-  /* Button container */
-  .digits-button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 1rem;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsive tweaks */
-  @media (max-width: 576px) {
-    .digits-game-container {
-      padding: 0.5rem;
-    }
-  
-    .digit-sequence .digit {
-      font-size: 1.5rem;
-      padding: 10px 12px;
-    }
-  
-    .input-section input {
-      font-size: 1rem;
-    }
-  
-    .feedback {
-      font-size: 0.95rem;
-    }
-  }
-  
+}

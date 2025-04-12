@@ -140,11 +140,15 @@ const Navbar = () => {
         className="navbar navbar-dark fixed-top shadow-lg py-2 rounded-bottom"
         style={{
           background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-          height: "70px",
+          minHeight: "64px",
           borderBottom: "3px solid rgba(255, 255, 255, 0.3)",
           zIndex: 1000,
+          paddingLeft: "1rem",
+          paddingRight: "1rem",
+          flexWrap: "nowrap",
         }}
       >
+
         <div className="container-fluid d-flex justify-content-between align-items-center px-2">
           {/* Brand */}
           <span className="navbar-brand fw-bold fs-5 text-light d-flex align-items-center mb-0">
@@ -155,16 +159,23 @@ const Navbar = () => {
           {/* Right Section: User Info & Buttons */}
           <div className="d-flex align-items-center gap-2">
             {user && (
-              <div className="d-flex align-items-center me-2 text-light">
+              <div className="d-flex align-items-center text-light me-2 flex-wrap">
                 <img
                   src={user.picture || defaultAvatar}
                   alt="User Avatar"
                   className="rounded-circle me-2"
-                  width="32"
-                  height="32"
+                  width="28"
+                  height="28"
+                  style={{ objectFit: "cover" }}
                 />
-                <span className="fw-semibold d-none d-sm-block">{user.name}</span>
+                <span
+                  className="fw-semibold d-none d-sm-inline"
+                  style={{ fontSize: "0.8rem" }}
+                >
+                  {user.name}
+                </span>
               </div>
+
             )}
 
             <button
@@ -196,9 +207,8 @@ const Navbar = () => {
             return (
               <button
                 key={index}
-                className={`btn d-flex flex-column align-items-center fw-bold ${
-                  isActive ? "text-warning" : "text-light"
-                }`}
+                className={`btn d-flex flex-column align-items-center fw-bold ${isActive ? "text-warning" : "text-light"
+                  }`}
                 onClick={() => navigate(item.path)}
                 aria-label={item.label}
                 title={item.label}
