@@ -99,4 +99,12 @@ p {
   .navbar .fw-semibold {
     font-size: 0.75rem;
   }
+
+  .navbar-brand span {
+    font-size: 0.9rem;
+  }
+
+  .navbar-brand img {
+    height: 26px;
+  }
 }
