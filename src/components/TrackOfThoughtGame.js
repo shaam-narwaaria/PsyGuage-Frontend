@@ -3,231 +3,178 @@ import axios from "axios";
 import "./TrackOfThoughtGame.css";
 
 const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
-    const [balls, setBalls] = useState([]);
-    const [score, setScore] = useState(0);
-    const [message, setMessage] = useState("");
-    const [gameOver, setGameOver] = useState(false);
-    const [ballTracks, setBallTracks] = useState({});
-    const [gameInProgress, setGameInProgress] = useState(false);
-    const [ballCount, setBallCount] = useState(0); // Track ball count
-    const BALLS_PER_GAME = 10;
+  const [balls, setBalls] = useState([]);
+  const [score, setScore] = useState(0);
+  const [message, setMessage] = useState("");
+  const [gameOver, setGameOver] = useState(false);
+  const [ballTracks, setBallTracks] = useState({});
+  const [gameInProgress, setGameInProgress] = useState(false);
+  const [ballCount, setBallCount] = useState(0);
+  const BALLS_PER_GAME = 10;
 
-    const colors = ["red", "blue", "green", "yellow"];
-    const sources = [
-        { left: 50, top: 50 },
-        { left: 150, top: 50 },
-        { left: 250, top: 50 },
-        { left: 350, top: 50 }
-    ];
-    const destinations = {
-        red: { left: 50, top: 400 },
-        blue: { left: 150, top: 400 },
-        green: { left: 250, top: 400 },
-        yellow: { left: 350, top: 400 }
+  const colors = ["red", "blue", "green", "yellow"];
+  const sources = [50, 150, 250, 350];
+  const destinations = {
+    red: 50,
+    blue: 150,
+    green: 250,
+    yellow: 350
+  };
+
+  const generateBall = () => {
+    const id = Math.random().toString(36).substr(2, 9);
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const left = sources[Math.floor(Math.random() * sources.length)];
+    const ball = {
+      id,
+      color,
+      top: 70,
+      left,
+      moving: true
     };
+    setBalls((prev) => [...prev, ball]);
+    setBallTracks((prev) => ({
+      ...prev,
+      [id]: { track: color, left }
+    }));
+    setBallCount((prev) => prev + 1);
+  };
 
-    const generateBall = () => {
-        if (ballCount >= BALLS_PER_GAME || !gameInProgress) return;
+  const moveBall = (id, dir) => {
+    if (!gameInProgress) return;
+    setBallTracks((prev) => {
+      const currentLeft = prev[id].left;
+      const newLeft = dir === "left"
+        ? Math.max(currentLeft - 100, 50)
+        : Math.min(currentLeft + 100, 350);
+      const newTrack = colors[(newLeft - 50) / 100];
+      return {
+        ...prev,
+        [id]: { track: newTrack, left: newLeft }
+      };
+    });
+  };
 
-        const id = Math.random().toString(36).substr(2, 9);
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const sourceIndex = Math.floor(Math.random() * sources.length);
-        const ball = {
-            id,
-            color,
-            source: sources[sourceIndex],
-            position: sources[sourceIndex].top,
-            target: destinations[color],
-            moving: true
-        };
-
-        setBalls((prevBalls) => [...prevBalls, ball]);
-        setBallTracks((prevTracks) => ({
-            ...prevTracks,
-            [id]: { track: "", position: sources[sourceIndex].top, left: sources[sourceIndex].left }
-        }));
-        setBallCount((prevCount) => prevCount + 1); // Increment ball count
-    };
-
-    const updateBallPositions = () => {
-        if (!gameInProgress) return;
-
-        setBalls((prevBalls) =>
-            prevBalls.map((ball) => {
-                const currentTrack = ballTracks[ball.id]?.track;
-                const newTop = ball.position + 2; // Ball falls down slowly
-
-                setBallTracks((prevTracks) => ({
-                    ...prevTracks,
-                    [ball.id]: { ...prevTracks[ball.id], position: newTop }
-                }));
-
-                // When ball reaches destination
-                if (newTop >= destinations[ball.color].top) {
-                    // Check if the ball is in the correct track
-                    if (currentTrack === ball.color) {
-                        setScore((prevScore) => prevScore + 10); // Increase score if correct
-                        setMessage(`Correct! ${ball.color} ball reached its correct destination.`);
-                    } else {
-                        setMessage(`Incorrect. ${ball.color} ball missed the correct destination.`);
-                    }
-                    return { ...ball, moving: false, position: newTop };
-                }
-
-                return { ...ball, position: newTop };
-            }).filter((ball) => ball.position < destinations[ball.color].top || ball.moving)
-        );
-
-        // End the game if all balls have reached their destination
-        if (balls.length === BALLS_PER_GAME && balls.every((ball) => ball.position >= destinations[ball.color].top)) {
-            endGame();
-        }
-    };
-
-
-
-    const moveBall = (id, direction) => {
-        if (!gameInProgress) return;
-
-        setBallTracks((prevTracks) => {
-            const currentLeft = prevTracks[id]?.left;
-            if (currentLeft !== undefined) {
-                const newLeft = direction === "left" ? Math.max(currentLeft - 100, 50) : Math.min(currentLeft + 100, 350);
-                const newTrack = colors[Math.floor((newLeft - 50) / 100)];
-
-                return {
-                    ...prevTracks,
-                    [id]: { ...prevTracks[id], left: newLeft, track: newTrack }
-                };
+  const updateBallPositions = () => {
+    setBalls((prevBalls) =>
+      prevBalls
+        .map((ball) => {
+          const newTop = ball.top + 1;
+          if (newTop >= 400) {
+            const correctTrack = destinations[ball.color];
+            const userTrack = ballTracks[ball.id]?.left;
+            if (userTrack === correctTrack) {
+              setScore((s) => s + 10);
+              setMessage("✔ Correct!");
+            } else {
+              setMessage("✘ Incorrect!");
             }
-            return prevTracks;
-        });
-    };
-
-    const endGame = () => {
-        setGameOver(true);
-        setGameInProgress(false);
-        saveScore(score);
-        setMessage(`Game Over! Final score: ${score}`);
-    };
-
-    // const saveScore = async (finalScore) => {
-    //     try {
-    //         await axios.post("http://localhost:5000/api/scores", {
-    //             gameName: "Track of Thought",
-    //             name: userName,
-    //             email: userEmail,
-    //             score: finalScore
-    //         });
-    //     } catch (error) {
-    //         console.error("Failed to save score:", error);
-    //     }
-    // };
-
-    const saveScore = async (finalScore) => {
-        try {
-            await axios.post("https://psyguage-backend.onrender.com/api/scores", {
-                gameName: "Track of Thought",
-                name: userName,
-                email: userEmail,
-                score: finalScore
-            });
-            console.log("Score submitted successfully!");
-        } catch (error) {
-            console.error("Failed to save score:", error);
-        }
-    };
-    
-
-    useEffect(() => {
-        let ballGenerator, positionUpdater;
-
-        if (gameInProgress) {
-            // Start generating balls only if ballCount is less than BALLS_PER_GAME
-            ballGenerator = setInterval(() => {
-                if (ballCount < BALLS_PER_GAME) {
-                    generateBall();
-                }
-            }, 3000);
-
-            positionUpdater = setInterval(updateBallPositions, 150);
-        }
-
-        return () => {
-            clearInterval(ballGenerator);
-            clearInterval(positionUpdater);
-        };
-    }, [gameInProgress, ballCount]); // Track `ballCount` instead of `balls.length`
-
-    const startGame = () => {
-        setGameInProgress(true);
-        setBalls([]);
-        setBallCount(0); // Reset ball count
-        setScore(0);
-        setBallTracks({});
-        setGameOver(false);
-        setMessage("Game started! Direct balls to the correct destinations.");
-    };
-
-    return (
-        <div className="game-container">
-            <div className="score-display">
-                Score: {score}
-            </div>
-            <div className="message">{message}</div>
-            <div className="game-area">
-                <div className="source-row">
-                    {sources.map((source, index) => (
-                        <div
-                            key={index}
-                            className="source"
-                            style={{ left: source.left, position: "absolute", top: source.top }}
-                        >
-                            Source
-                        </div>
-                    ))}
-                </div>
-                {balls.map((ball) => (
-                    <div
-                        key={ball.id}
-                        className="ball"
-                        style={{
-                            backgroundColor: ball.color,
-                            top: ballTracks[ball.id]?.position || ball.position,
-                            left: ballTracks[ball.id]?.left || ball.source.left,
-                            position: "absolute"
-                        }}
-                    >
-                        <button onClick={() => moveBall(ball.id, "left")}>←</button>
-                        <button onClick={() => moveBall(ball.id, "right")}>→</button>
-                    </div>
-                ))}
-                <div className="destination-row">
-                    {Object.entries(destinations).map(([color, pos]) => (
-                        <div
-                            key={color}
-                            className="destination"
-                            style={{ left: pos.left, position: "absolute", top: pos.top }}
-                        >
-                            {color}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {!gameInProgress && !gameOver && (
-                <button onClick={startGame}>Start Game</button>
-            )}
-
-            {gameOver && (
-                <div className="game-over">
-                    <button onClick={startGame}>Play Again</button>
-                </div>
-            )}
-
-            <button className="back-button" onClick={() => setmovePages(1)}>Back</button>
-        </div>
+            return null; // remove ball
+          }
+          return { ...ball, top: newTop };
+        })
+        .filter(Boolean)
     );
+  };
+
+  const startGame = () => {
+    setBalls([]);
+    setScore(0);
+    setMessage("");
+    setBallCount(0);
+    setGameOver(false);
+    setGameInProgress(true);
+  };
+
+  const endGame = () => {
+    setGameInProgress(false);
+    setGameOver(true);
+    saveScore(score);
+    setMessage(`🎉 Game Over! Final Score: ${score}`);
+  };
+
+  const saveScore = async (finalScore) => {
+    try {
+      await axios.post("https://psyguage-backend.onrender.com/api/scores", {
+        gameName: "Track of Thought",
+        name: userName,
+        email: userEmail,
+        score: finalScore
+      });
+    } catch (error) {
+      console.error("Error saving score", error);
+    }
+  };
+
+  useEffect(() => {
+    let genInterval, moveInterval;
+    if (gameInProgress) {
+      genInterval = setInterval(() => {
+        if (ballCount < BALLS_PER_GAME) generateBall();
+      }, 1200);
+      moveInterval = setInterval(updateBallPositions, 50);
+    }
+
+    return () => {
+      clearInterval(genInterval);
+      clearInterval(moveInterval);
+    };
+  }, [gameInProgress, ballCount]);
+
+  useEffect(() => {
+    if (ballCount === BALLS_PER_GAME && balls.length === 0 && gameInProgress) {
+      endGame();
+    }
+  }, [balls, ballCount, gameInProgress]);
+
+  return (
+    <div className="game-container container-fluid p-3">
+      <div className="text-center mb-3">
+        <h4 className="fw-bold">Track of Thought</h4>
+        <p className="text-primary">{message}</p>
+        <h5>Score: {score}</h5>
+      </div>
+
+      <div className="game-board position-relative mx-auto">
+        {sources.map((left, i) => (
+          <div key={i} className="track-start" style={{ left }}>Start</div>
+        ))}
+
+        {Object.entries(destinations).map(([color, left]) => (
+          <div key={color} className="track-end" style={{ left, backgroundColor: color }}>
+            {color}
+          </div>
+        ))}
+
+        {balls.map((ball) => (
+          <div
+            key={ball.id}
+            className="ball"
+            style={{
+              top: ball.top,
+              left: ballTracks[ball.id]?.left || ball.left,
+              backgroundColor: ball.color
+            }}
+          >
+            <div className="controls">
+              <button onClick={() => moveBall(ball.id, "left")}>&larr;</button>
+              <button onClick={() => moveBall(ball.id, "right")}>&rarr;</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center mt-4">
+        {!gameInProgress && !gameOver && (
+          <button className="btn btn-success" onClick={startGame}>Start Game</button>
+        )}
+        {gameOver && (
+          <button className="btn btn-warning" onClick={startGame}>Play Again</button>
+        )}
+        <button className="btn btn-outline-dark ms-3" onClick={() => setmovePages(1)}>Back</button>
+      </div>
+    </div>
+  );
 };
 
 export default TrackOfThoughtGame;
