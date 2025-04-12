@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import "./Home.css";
 
 function Home({ setmovePages }) {
@@ -70,9 +69,9 @@ function Home({ setmovePages }) {
                                 </button>
                             </div>
 
-                            <p className="mt-3 small text-center text-muted">
+                            {/* <p className="mt-3 small text-center text-muted">
                                 No registration required. Try it now!
-                            </p>
+                            </p> */}
                         </div>
 
                         {/* Right-Side Image (Hidden on Mobile) */}
@@ -168,7 +167,7 @@ function Home({ setmovePages }) {
                         {[
                             { img: "images/multitasking.jpg", title: "Multitasking Challenge", desc: "Test your ability to handle multiple tasks efficiently." },
                             { img: "images/problemsolver.jpg", title: "Problem Solver", desc: "Sharpen your logical thinking and problem-solving skills." },
-                            { img: "/clickp.jpg", title: "Reaction Timer", desc: "Measure your speed and accuracy in real-time." },
+                            { img: "images/reactiontime.jpg", title: "Reaction Timer", desc: "Measure your speed and accuracy in real-time." },
                             { img: "images/recallpower.jpg", title: "Recall Power", desc: "Boost your memory recall and cognitive function." },
                             { img: "images/decisionmaking.jpg", title: "Decision Maker", desc: "Enhance your decision-making under pressure." }
                         ].map((game, index) => (
