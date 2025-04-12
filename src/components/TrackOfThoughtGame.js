@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import "./TrackOfThoughtGame.css";
 
 const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
@@ -10,16 +11,19 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
   const [ballTracks, setBallTracks] = useState({});
   const [gameInProgress, setGameInProgress] = useState(false);
   const [ballCount, setBallCount] = useState(0);
-  const BALLS_PER_GAME = 10;
+  const BALLS_PER_GAME = 20;
+
+  const navigate = useNavigate();
 
   const colors = ["red", "blue", "green", "yellow"];
-  const sources = [50, 150, 250, 350];
+  const sources = [5, 95, 185, 275];
   const destinations = {
-    red: 50,
-    blue: 150,
-    green: 250,
-    yellow: 350
+    red: 5,
+    blue: 95,
+    green: 185,
+    yellow: 275
   };
+
 
   const generateBall = () => {
     const id = Math.random().toString(36).substr(2, 9);
@@ -40,20 +44,23 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
     setBallCount((prev) => prev + 1);
   };
 
+ 
   const moveBall = (id, dir) => {
     if (!gameInProgress) return;
     setBallTracks((prev) => {
       const currentLeft = prev[id].left;
-      const newLeft = dir === "left"
-        ? Math.max(currentLeft - 100, 50)
-        : Math.min(currentLeft + 100, 350);
-      const newTrack = colors[(newLeft - 50) / 100];
+      const currentIndex = sources.indexOf(currentLeft);
+      let newIndex = dir === "left" ? currentIndex - 1 : currentIndex + 1;
+      newIndex = Math.max(0, Math.min(newIndex, sources.length - 1));
+      const newLeft = sources[newIndex];
+      const newTrack = colors[newIndex];
       return {
         ...prev,
         [id]: { track: newTrack, left: newLeft }
       };
     });
   };
+
 
   const updateBallPositions = () => {
     setBalls((prevBalls) =>
@@ -96,7 +103,7 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
   const saveScore = async (finalScore) => {
     try {
       await axios.post("https://psyguage-backend.onrender.com/api/scores", {
-        gameName: "Track of Thought",
+        gameName: "thoughtgame",
         name: userName,
         email: userEmail,
         score: finalScore
@@ -128,14 +135,16 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
   }, [balls, ballCount, gameInProgress]);
 
   return (
-    <div className="game-container container-fluid p-3">
+    <div className="game-container container py-3 px-2">
       <div className="text-center mb-3">
-        <h4 className="fw-bold">Track of Thought</h4>
-        <p className="text-primary">{message}</p>
-        <h5>Score: {score}</h5>
+        <h4 className="fw-bold text-gradient">🎯 Track of Thought</h4>
+        <p className={`feedback-message ${message.includes("✔") ? "text-success" : "text-danger"}`}>
+          {message}
+        </p>
+        <h5 className="score-display">Score: <span className="text-info">{score}</span></h5>
       </div>
 
-      <div className="game-board position-relative mx-auto">
+      <div className="game-board position-relative mx-auto shadow-sm rounded">
         {sources.map((left, i) => (
           <div key={i} className="track-start" style={{ left }}>Start</div>
         ))}
@@ -149,16 +158,16 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
         {balls.map((ball) => (
           <div
             key={ball.id}
-            className="ball"
+            className="ball shadow"
             style={{
               top: ball.top,
               left: ballTracks[ball.id]?.left || ball.left,
               backgroundColor: ball.color
             }}
           >
-            <div className="controls">
-              <button onClick={() => moveBall(ball.id, "left")}>&larr;</button>
-              <button onClick={() => moveBall(ball.id, "right")}>&rarr;</button>
+            <div className="ball-controls d-flex justify-content-between">
+              <button className="btn btn-sm btn-light" onClick={() => moveBall(ball.id, "left")}>&larr;</button>
+              <button className="btn btn-sm btn-light" onClick={() => moveBall(ball.id, "right")}>&rarr;</button>
             </div>
           </div>
         ))}
@@ -166,12 +175,12 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
 
       <div className="text-center mt-4">
         {!gameInProgress && !gameOver && (
-          <button className="btn btn-success" onClick={startGame}>Start Game</button>
+          <button className="btn btn-success px-4" onClick={startGame}>Start Game</button>
         )}
         {gameOver && (
-          <button className="btn btn-warning" onClick={startGame}>Play Again</button>
+          <button className="btn btn-warning px-4" onClick={startGame}>Play Again</button>
         )}
-        <button className="btn btn-outline-dark ms-3" onClick={() => setmovePages(1)}>Back</button>
+        <button className="btn btn-outline-secondary ms-3 px-4" onClick={() => navigate('/games')}>Back to Menu</button>
       </div>
     </div>
   );

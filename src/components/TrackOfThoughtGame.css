@@ -1,66 +1,179 @@
+/* Base Styles (Mobile-First) */
 .game-container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #d2fdfb, #d3f9d8);
-  }
-  
-  .game-board {
-    width: 100%;
-    max-width: 450px;
-    height: 500px;
-    background: #fff;
-    border: 2px solid #ccc;
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .track-start, .track-end {
-    width: 80px;
-    height: 30px;
-    position: absolute;
-    top: 30px;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    background-color: #f0f0f0;
-  }
-  
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d2fdfb, #d3f9d8);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.game-board {
+  width: 100%;
+  max-width: 450px;
+  height: 500px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.track-start,
+.track-end {
+  width: 20%;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.track-end {
+  top: 440px;
+  color: #fff;
+  border: 2px solid #000;
+}
+
+.ball {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+  position: absolute;
+  top: 45px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.controls button {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 600px) {
+  .track-start,
   .track-end {
-    top: 440px;
-    color: #fff;
-    border: 2px solid #000;
+    width: 80px;
+    font-size: 1rem;
   }
-  
-  .ball {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 18px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  }
-  
-  .controls {
-    position: absolute;
-    top: 45px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
+
   .controls button {
-    background: rgba(255,255,255,0.7);
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    padding: 0 5px;
-    border-radius: 4px;
+    font-size: 1.2rem;
+    padding: 0 10px;
   }
-  
+}
+
+
+/* Base Styles */
+.game-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d2fdfb, #d3f9d8);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.game-board {
+  width: 100%;
+  max-width: 450px;
+  height: 500px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Track Labels */
+.track-start,
+.track-end {
+  width: 20%;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.track-end {
+  top: 440px;
+  color: #fff;
+  border: 2px solid #000;
+}
+
+/* Ball Styles */
+.ball {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Controls */
+.controls {
+  position: absolute;
+  top: 45px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.controls button {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 600px) {
+  .track-start,
+  .track-end {
+    width: 80px;
+    font-size: 1rem;
+  }
+
+  .controls button {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+}
