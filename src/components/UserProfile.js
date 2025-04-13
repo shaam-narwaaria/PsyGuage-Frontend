@@ -142,8 +142,8 @@ const UserProfile = ({ localName, localEmail, setmovePages }) => {
               {renderGameCard("MissingNumber", "Missing Number", "images/missingnumber.jpg")}
               {renderGameCard("ArrowGame", "Arrow", "/arrowp.jpg")}
               {renderGameCard("SearchStar", "Star Search", "/images/starsearch.jpg")}
-              {renderGameCard("pinballcounter", "Open Pinball Recall", "/pinp.jpg")}
-              {renderGameCard("thoughtgame", "Track of Thought", "images/trackofthought.jpg")}
+              {renderGameCard("PinballCounter", "Open Pinball Recall", "/pinp.jpg")}
+              {renderGameCard("ThoughtGame", "Track of Thought", "images/trackofthought.jpg")}
               {renderGameCard("DigitGame", "Digit", "images/digit.jpg")}
             </div>
           </>

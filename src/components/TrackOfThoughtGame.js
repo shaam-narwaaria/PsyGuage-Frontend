@@ -103,7 +103,7 @@ const TrackOfThoughtGame = ({ userName, userEmail, setmovePages }) => {
   const saveScore = async (finalScore) => {
     try {
       await axios.post("https://psyguage-backend.onrender.com/api/scores", {
-        gameName: "thoughtgame",
+        gameName: "ThoughtGame",
         name: userName,
         email: userEmail,
         score: finalScore
